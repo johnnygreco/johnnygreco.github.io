@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="http://www.astro.princeton.edu/~jgreco/theme/stylesheet/style.css">
+
+  <link rel="stylesheet" type="text/css" href="http://www.astro.princeton.edu/~jgreco/theme/pygments/github.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="http://www.astro.princeton.edu/~jgreco/theme/stylesheet/pygments.css">-->
+  <link rel="stylesheet" type="text/css" href="http://www.astro.princeton.edu/~jgreco/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="http://www.astro.princeton.edu/~jgreco/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Johnny Greco Atom">
+
+
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+    <meta name="author" content="Johnny Greco" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Johnny Greco"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Johnny Greco"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://www.astro.princeton.edu/~jgreco"/>
+<meta property="og:image" content="http://www.astro.princeton.edu/~jgreco/images/pic.jpg">
+
+  <title>Johnny Greco &ndash; About</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://www.astro.princeton.edu/~jgreco">
+        <img src="http://www.astro.princeton.edu/~jgreco/images/pic.jpg" alt="Johnny Greco" title="Johnny Greco">
+      </a>
+      <h1><a href="http://www.astro.princeton.edu/~jgreco">Johnny Greco</a></h1>
+<p>Astronomer - Data Miner - Pythonista</p>      <nav>
+        <ul class="list">
+          <li><a href="http://www.astro.princeton.edu/~jgreco/">About</a></li>
+          <li><a href="http://www.astro.princeton.edu/~jgreco/publications/">Publications</a></li>
+          <li><a href="http://www.astro.princeton.edu/~jgreco/curriculum-vita/">CV</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-envelope" href="mailto:jgreco@astro.princeton.edu"><i class="fa fa-envelope fa-2x"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/johnnygreco"><i class="fa fa-github fa-2x"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+
+<article>
+  <header>
+    <h1 id="about">About</h1>
+  </header>
+  <div>
+    <p>I am a third-year graduate student and <a href="https://www.nsfgrfp.org">NSF Graduate Research Fellow</a> in the <a href="http://www.princeton.edu/astro/">Department of Astrophysical Sciences</a> at <a href="http://www.princeton.edu/main/">Princeton University</a>. I am fascinated by the process of extracting useful information from noisy data and have worked on a range of data analysis problems in the fields of <a href="http://adsabs.harvard.edu/abs/2015ApJ...808..151G">cosmology</a> and <a href="http://arxiv.org/abs/1602.00691">exoplanets</a>. For my thesis, I am working with <a href="http://crispygreene.wix.com/jenny">Jenny Greene</a> on a systematic search for <a href="https://en.wikipedia.org/wiki/Ultra_diffuse_galaxy">ultra-diffuse galaxies</a> in data from the <a href="http://www.naoj.org/Projects/HSC/HSCProject.html">Hyper Suprime-Cam survey</a>, a 300-night optical/near-infrared survey with the 8.2 meter <a href="http://subarutelescope.org">Subaru Telescope</a>. Before coming to Princeton, I studied <a href="https://physics.osu.edu">physics</a> and <a href="http://astronomy.osu.edu">astronomy</a> at the <a href="https://www.osu.edu">Ohio State University</a>, where I worked with <a href="http://www.astronomy.ohio-state.edu/~martini/">Paul Martini</a> and <a href="http://www.astronomy.ohio-state.edu/~thompson/">Todd Thompson</a>. </p>
+<h2>Recent Result</h2>
+<hr />
+<p>In our recently submitted <a href="http://arxiv.org/abs/1602.00691">paper</a>, <a href="https://www.ias.edu/scholars/timothy-david-brandt">Tim Brandt</a> and I show how to measure spectral errors and covariances in high-contrast <a href="https://en.wikipedia.org/wiki/Integral_field_spectrograph">integral-field spectroscopic</a> observations of exoplanets and include them self-consistently in parameter retrievals. Why is this an interesting/important problem? As we show in our paper, we <em>know</em> some component of the noise in such observations will be correlated due to the scaling of <a href="https://en.wikipedia.org/wiki/Diffraction#Speckle_patterns">diffraction speckles</a> with wavelength, and not accounting for this can potentially bias the inferred parameters. As a demonstration of this effect, let's look at some data:</p>
+<p><img alt="Spectral Noise" src="http://www.astro.princeton.edu/~jgreco/images/specnoise.gif" /></p>
+<p>In the above animation, we step through the wavelength frames of a <a href="https://www.gemini.edu/sciops/instruments/gpi/public-data">GPI data cube</a>. There is no planet or disk in this image, so we are looking at regions of empty sky, which are realizations of the spectral noise. The dots in the left panel correspond to the noise spectra in the right panel, and the black line tracks the current wavelength frame of the data cube. It is immediately clear that the noise is highly correlated &ndash; you can even pick out a characteristic correlation length by-eye in the right panel.  </p>
+<p><a href="http://www.princeton.edu/main/"><p align="right"><img src="http://www.astro.princeton.edu/~jgreco/images/PU_banner.png" width=220px></p></a></p>
+  </div>
+</article>
+
+    <footer>
+      <!--  <p>&copy; Johnny Greco 2016</p> -->
+<p>&copy; 2016 Johnny Greco &ndash; Built with <a href="http://getpelican.com">Pelican</a> &ndash; Adapted from <a href="https://github.com/alexandrevicenzi/flex">Flex</a>    </footer>
+  </main>
+
+
+
+
+
+</body>
+</html>
