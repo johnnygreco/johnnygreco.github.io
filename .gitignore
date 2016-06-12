@@ -1,0 +1,7 @@
+.dropbox.attr
+.DS_Store
+*.pyc
+*.log
+.*.swp
+.dropbox.attr
+.ipynb_checkpoints
