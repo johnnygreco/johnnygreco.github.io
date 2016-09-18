@@ -32,26 +32,26 @@
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="http://www.astro.princeton.edu/~jgreco/author/johnny.html">
 <meta property="article:section" content="Research"/>
-<meta property="og:image" content="http://www.astro.princeton.edu/~jgreco//images/pic.jpg">
+<meta property="og:image" content="http://www.astro.princeton.edu/~jgreco/images/pic.jpg">
   <title>Johnny Greco &ndash; Spectral Covariance in IFS Data</title>
 </head>
 <body>
   <aside>
     <div>
       <a href="http://www.astro.princeton.edu/~jgreco">
-        <img src="http://www.astro.princeton.edu/~jgreco//images/pic.jpg" alt="Johnny Greco" title="Johnny Greco">
+        <img src="http://www.astro.princeton.edu/~jgreco/images/pic.jpg" alt="Johnny Greco" title="Johnny Greco">
       </a>
       <h1><a href="http://www.astro.princeton.edu/~jgreco">Johnny Greco</a></h1>
 <p>Astronomer - Data Miner - Pythonista</p>      <nav>
         <ul class="list">
-          <li><a href="http://www.astro.princeton.edu/~jgreco//">About</a></li>
-          <li><a href="http://www.astro.princeton.edu/~jgreco//publications/">Publications</a></li>
-          <li><a href="http://www.astro.princeton.edu/~jgreco//blog_index.html">Research Blog</a></li>
-          <li><a href="http://www.astro.princeton.edu/~jgreco//curriculum-vitae/">CV</a></li>
+          <li><a href="http://www.astro.princeton.edu/~jgreco/">About</a></li>
+          <li><a href="http://www.astro.princeton.edu/~jgreco/publications/">Publications</a></li>
+          <li><a href="http://www.astro.princeton.edu/~jgreco/blog_index.html">Research Blog</a></li>
+          <li><a href="http://www.astro.princeton.edu/~jgreco/curriculum-vitae/">CV</a></li>
         </ul>
       </nav>
       <ul class="social">
-        <li><a class="sc-envelope" href="http://www.astro.princeton.edu/~jgreco//email/"><i class="fa fa-envelope fa-2x"></i></a></li>
+        <li><a class="sc-envelope" href="http://www.astro.princeton.edu/~jgreco/email/"><i class="fa fa-envelope fa-2x"></i></a></li>
         <li><a class="sc-github" href="https://github.com/johnnygreco"><i class="fa fa-github fa-2x"></i></a></li>
       </ul>
     </div>
@@ -71,9 +71,9 @@
 <p>For comparison, here's what the animation would look like if the noise were completely uncorrelated:</p>
 <p><img alt="Uncorrelated Noise" src="http://www.astro.princeton.edu/~jgreco/images/uncorr_specnoise.gif" /></p>
 <p>To generate this movie, I simulated independent Gaussian noise within the footprint of the GPI data cube. As you can see, this familiar <a href="https://en.wikipedia.org/wiki/White_noise">white noise</a> static is very different from what we observe. Fortunately, since we often have a plethora of data of empty sky, it is possible to <em>measure</em> both the amplitude and covariance of the spectral noise. </p>
-<p>In the figure below, I compare the measured <a href="https://en.wikipedia.org/wiki/Correlation_function">correlation function</a>, which is closely related to the <a href="https://en.wikipedia.org/wiki/Covariance_matrix">covariance matrix</a>, within an annulus (i.e., at fixed separation) extracted from the GPI data cube shown in the first animation (left panel) and the simulated data shown in the second animation (right panel). As expected, the correlation function for the simulated data is a delta function, which means the covariance matrix with be diagonal. In contrast, the left panel reveals spectral correlation on several characteristic scales; hence, the covariance matrix will have non-zero off-diagonal terms, which should be included an atmospheric parameter retrieval. </p>
+<p>In the figure below, I compare the measured <a href="https://en.wikipedia.org/wiki/Correlation_function">correlation function</a>, which is closely related to the <a href="https://en.wikipedia.org/wiki/Covariance_matrix">covariance matrix</a>, within an annulus (i.e., at fixed separation) extracted from the GPI data cube shown in the first animation (left panel) and the simulated data cube shown in the second animation (right panel). As expected, the correlation function for the simulated data is a delta function, which means the covariance matrix with be diagonal. In contrast, the left panel reveals spectral correlation on several characteristic scales; hence, the covariance matrix will have non-zero off-diagonal terms, which should be included in an atmospheric parameter retrieval. </p>
 <p><img alt="Correlation Functions" src="http://www.astro.princeton.edu/~jgreco/images/slide_corr_func_uncorr_loci.pdf" /></p>
-<p>Interestingly, we find that the form of the covariance matrix is highly sensitive to the details of the implementation of the algorithm used to subtract the <a href="https://en.wikipedia.org/wiki/Point_spread_function">point-spread function</a>. This means that it is essential to measure the spectral covariance for each data set and reduction technique. </p>
+<p>Interestingly, we find that the form of the covariance matrix is highly sensitive to the details of the implementation of the algorithm used to subtract the <a href="https://en.wikipedia.org/wiki/Point_spread_function">point-spread function</a>. This finding highlights that it is essential to measure the spectral covariance for each data set and reduction technique. </p>
 <p>For much more details, as well as a study of the importance of including spectral covariances in parameter retrievals, <a href="http://arxiv.org/abs/1602.00691">check out our paper</a>. </p>
   </div>
   <div class="tag-cloud">
@@ -104,7 +104,7 @@
     "name": "Johnny",
     "url": "http://www.astro.princeton.edu/~jgreco/author/johnny.html"
   },
-  "image": "http://www.astro.princeton.edu/~jgreco//images/pic.jpg",
+  "image": "http://www.astro.princeton.edu/~jgreco/images/pic.jpg",
   "url": "http://www.astro.princeton.edu/~jgreco/blog/covariance/",
   "description": "In our recently submitted paper, Tim Brandt and I show how to measure spectral errors and covariances in high-contrast integral-field spectroscopic observations of exoplanets and include them self-consistently in parameter retrievals."
 }
