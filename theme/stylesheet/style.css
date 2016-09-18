@@ -111,8 +111,9 @@ aside nav ul li {
     display: inline;
     line-height: 1.6em;
     font-size: 1.28em;
-/*    text-align: left;
-    margin-left: 24%;*/ 
+    /*text-align: right;*/
+    /*margin-left: 24%;*/ 
+    /*margin-right: 10%;*/
 }
 
 main nav {
@@ -269,7 +270,7 @@ main .related-posts {
 }
 
 a.btn {
-    background-color: #d9411e;
+    background-color: #951ed9;
     padding: .4em .6em;
     font-size: .9em;
     line-height: 1;
