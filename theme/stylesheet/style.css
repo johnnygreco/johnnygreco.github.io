@@ -11,7 +11,7 @@ h4,
 h5,
 h6 {
     font-weight: 300;
-    line-height: 1.1
+    line-height: 1.1;
 }
 
 h1 {
@@ -27,7 +27,7 @@ h3 {
 }
 
 h4 {
-    font-size: 1.36em
+    font-size: 1.4em
 }
 
 h5 {
@@ -211,7 +211,6 @@ main article code {
     color: #9600ff;
     padding: 1px 3px;
     background-color: #f7f7f9;
-    border: 1px solid #e1e1e8;
     border-radius: 3px
 }
 
@@ -238,7 +237,7 @@ main article table th {
 
 main footer {
     padding-top: 4px;
-    border-top: 1px solid #eee
+    /*border-top: 1px solid #eee*/
 }
 
 main footer p {
