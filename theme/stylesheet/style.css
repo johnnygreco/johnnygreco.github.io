@@ -356,8 +356,10 @@ ul.social a.sc-stack-overflow {
     background-color: #f90
 }
 
+ul.social a.sc-twitter,
 ul.social a.sc-twitter {
-    background-color: #4da7de
+    padding-left:30px;
+  /*  background-color: #4da7de */
 }
 
 ul.social a.sc-youtube {
@@ -366,7 +368,7 @@ ul.social a.sc-youtube {
 
 ul.social a.sc-github,
 ul.social a.sc-github-alt {
-    padding-left:50px;
+    padding-left:40px;
 /* background-color: #111010 */
 }
 
