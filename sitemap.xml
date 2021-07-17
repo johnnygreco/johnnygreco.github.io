@@ -2,6 +2,6 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://example.org/categories/</loc></url><url>
-            <loc>http://example.org/</loc></url><url>
-            <loc>http://example.org/tags/</loc></url></urlset>
+            <loc>https://johnnygreco.space/categories/</loc></url><url>
+            <loc>https://johnnygreco.space/</loc></url><url>
+            <loc>https://johnnygreco.space/tags/</loc></url></urlset>
