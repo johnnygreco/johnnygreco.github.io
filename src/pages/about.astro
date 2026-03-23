@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import meImage from '../assets/me.png';
+---
+
+<BaseLayout title="About — Johnny Greco" description="AI engineer, former astronomer.">
+  <section class="mx-auto max-w-5xl px-6 py-12">
+    <div class="flex flex-col md:flex-row gap-8 items-start mb-12">
+      <Image
+        src={meImage}
+        alt="Johnny Greco"
+        width={160}
+        height={160}
+        class="rounded-2xl border-2 border-border flex-shrink-0"
+      />
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold">👋 About me</h1>
+        <p class="mt-4 text-lg text-text-muted">
+          AI engineer, former astronomer.
+        </p>
+      </div>
+    </div>
+
+    <div class="prose prose-lg max-w-none">
+      <p>
+        Hey! I'm Johnny. I build AI systems — mostly agent-based stuff these days. I spend most of my time writing code alongside AI agents, which still feels a little weird to say out loud.
+      </p>
+
+      <p>
+        Before all this, I was an astronomer 🔭. PhD at Princeton studying the faintest galaxies in the universe,
+        then a postdoc at Ohio State. I spent years building pipelines to process terabytes of telescope data
+        and find objects nobody had seen before.
+      </p>
+
+      <h2>How I got here 🛤️</h2>
+
+      <p>
+        I grew up in Las Vegas 🎰. Dropped out of college to be a rock star 🤘 (didn't pan out).
+        Made sushi 🍣 to pay rent when I went back. Found physics, then astronomy, then realized
+        I liked building software more than writing papers.
+      </p>
+
+      <h2>This site 📓</h2>
+
+      <p>
+        I write <a href="/notes/">notes</a> here when something's on my mind. The <a href="/log/">Agent's Log</a> is
+        the weird part — it's entirely written by my AI agents. They log what they're working on every day and I just let it happen.
+      </p>
+
+      <h2>Elsewhere 🌐</h2>
+
+      <ul>
+        <li><a href="https://github.com/johnnygreco" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/johnnygreco" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://scholar.google.com/citations?user=CDWpgoAAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a> — my academic publications</li>
+        <li><a href="mailto:jgreco.ai@gmail.com">jgreco.ai@gmail.com</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

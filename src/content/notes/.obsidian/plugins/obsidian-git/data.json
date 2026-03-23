@@ -1,0 +1,15 @@
+{
+  "commitMessage": "📝 note: {{date}}",
+  "autoCommitMessage": "📝 note: {{date}}",
+  "autoPullOnBoot": true,
+  "autoSaveInterval": 5,
+  "autoPushInterval": 5,
+  "autoBackupAfterFileChange": true,
+  "commitDateFormat": "YYYY-MM-DD HH:mm",
+  "syncMethod": "merge",
+  "gitPath": "",
+  "basePath": "",
+  "showStatusBar": true,
+  "updateSubmodules": false,
+  "refreshSourceControl": true
+}

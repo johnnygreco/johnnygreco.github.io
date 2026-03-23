@@ -1,0 +1,104 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CommandPalette from '../components/CommandPalette.tsx';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Johnny Greco — AI engineer, former astronomer.',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Preload fonts -->
+    <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Johnny Greco" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon (random halloween emoji) -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      (function() {
+        var e = ['👻','🎃','🦇','🕸️','💀','🧛','🧟','🐈‍⬛','🌙'];
+        var s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="78" font-size="80" text-anchor="middle">' + e[Math.floor(Math.random()*e.length)] + '</text></svg>';
+        var l = document.querySelector('link[rel="icon"]');
+        if (l) l.href = 'data:image/svg+xml,' + encodeURIComponent(s);
+      })();
+    </script>
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Johnny Greco" href="/rss.xml" />
+
+    <!-- Theme init (prevent FOUC) -->
+    <script is:inline>
+      (function() {
+        var t = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        if (!window.__themeSwapListenerAdded) {
+          window.__themeSwapListenerAdded = true;
+          document.addEventListener('astro:before-swap', function(e) {
+            e.newDocument.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+          });
+        }
+      })();
+    </script>
+
+    <ClientRouter />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!--
+    ╔══════════════════════════════════════════════════╗
+    ║                                                  ║
+    ║   👋 Hey, fellow builder.                        ║
+    ║   View the source: github.com/johnnygreco/       ║
+    ║       johnnygreco.github.io                      ║
+    ║                                                  ║
+    ╚══════════════════════════════════════════════════╝
+    -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+    <CommandPalette client:only="react" />
+    <Header />
+    <main id="main-content" class="flex-1" data-pagefind-body>
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      console.log(
+        '%c👋 Hey, fellow builder. %cView the source → github.com/johnnygreco/johnnygreco.github.io',
+        'font-size: 14px; font-weight: bold; color: #6366f1;',
+        'font-size: 14px; color: #8a8a9a;'
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+---
+import ThemeToggle from './ThemeToggle.tsx';
+
+const navItems = [
+  { label: "Agent's Log", href: '/log/' },
+  { label: 'Notes', href: '/notes/' },
+  { label: 'Projects', href: '/projects/' },
+  { label: 'About', href: '/about/' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <a href="/" class="font-sans font-semibold text-xl text-text hover:text-accent transition-colors">
+      Johnny Greco
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-6">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'text-sm font-medium transition-colors',
+            currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+              ? 'text-accent'
+              : 'text-text-muted hover:text-text',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+      <ThemeToggle client:load />
+      <button
+        id="cmd-palette-trigger"
+        class="hidden md:flex items-center gap-1 text-xs text-text-muted border border-border rounded px-2 py-1 hover:border-accent/50 hover:text-text transition-colors cursor-pointer"
+        aria-label="Open command palette"
+      >
+        <kbd class="font-mono">⌘K</kbd>
+      </button>
+    </div>
+
+    <!-- Mobile menu button -->
+    <div class="flex md:hidden items-center gap-3">
+      <ThemeToggle client:load />
+      <button
+        id="mobile-menu-toggle"
+        class="text-text-muted hover:text-text transition-colors cursor-pointer"
+        aria-label="Toggle menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6" class="menu-top" />
+          <line x1="3" y1="12" x2="21" y2="12" class="menu-mid" />
+          <line x1="3" y1="18" x2="21" y2="18" class="menu-bot" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-bg">
+    <div class="px-6 py-4 flex flex-col gap-3">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'text-sm font-medium transition-colors',
+            currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+              ? 'text-accent'
+              : 'text-text-muted hover:text-text',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    toggle?.addEventListener('click', () => {
+      menu?.classList.toggle('hidden');
+    });
+  });
+</script>

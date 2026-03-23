@@ -1,0 +1,203 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/Inter-Variable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+--font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+}
+
+/* Dark theme (default) */
+:root {
+  --bg: #0a0a0b;
+  --surface: #141416;
+  --border: #23232a;
+  --text: #ededef;
+  --text-muted: #8a8a9a;
+  --accent: #818cf8;
+  --accent-hover: #a5b4fc;
+  --accent-subtle: rgba(99, 102, 241, 0.1);
+  color-scheme: dark;
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e5e5ea;
+  --text: #1a1a1b;
+  --text-muted: #6b6b7b;
+  --accent: #4f46e5;
+  --accent-hover: #6366f1;
+  --accent-subtle: rgba(79, 70, 229, 0.08);
+  color-scheme: light;
+}
+
+/* Theme transitions — scoped to elements that actually switch themes */
+[data-theme] {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+}
+[data-theme] header,
+[data-theme] footer,
+[data-theme] main {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Links */
+a:not(.btn) {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+a:not(.btn):hover {
+  color: var(--accent-hover);
+}
+
+/* Buttons */
+.btn-primary {
+  color: white !important;
+  background-color: var(--accent);
+}
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Code */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+:not(pre) > code {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15em 0.35em;
+}
+
+/* Shiki dual theme */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+}
+:root:not([data-theme="light"]) .astro-code,
+:root:not([data-theme="light"]) .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+/* Code blocks */
+pre.astro-code {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  position: relative;
+}
+
+/* Prose overrides for typography plugin */
+.prose {
+  --tw-prose-body: var(--text);
+  --tw-prose-headings: var(--text);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--text);
+  --tw-prose-code: var(--text);
+  --tw-prose-quotes: var(--text-muted);
+  --tw-prose-quote-borders: var(--border);
+  --tw-prose-hr: var(--border);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+  max-width: 680px;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--accent-subtle);
+}
+.prose a:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* KaTeX dark mode */
+.katex {
+  color: var(--text);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent-subtle);
+  color: var(--text);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+/* Skip to content */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: white;
+  border-radius: 0 0 4px 4px;
+  font-size: 0.875rem;
+}
+.skip-to-content:focus {
+  top: 0;
+}

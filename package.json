@@ -1,0 +1,49 @@
+{
+  "name": "johnnygreco.github.io",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Personal website for Johnny Greco — johnnygreco.dev",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && npx pagefind --site dist",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "npx playwright test",
+    "test:desktop": "npx playwright test --project=desktop",
+    "test:mobile": "npx playwright test --project=mobile",
+    "test:e2e": "npx playwright test tests/e2e/",
+    "test:a11y": "npx playwright test tests/e2e/accessibility.spec.ts",
+    "test:seo": "npx playwright test tests/e2e/seo.spec.ts",
+    "test:perf": "npx playwright test tests/e2e/performance.spec.ts",
+    "test:build": "npx tsx tests/benchmarks/build-analysis.ts",
+    "benchmark": "npx tsx tests/benchmarks/build-timing.ts && npx tsx tests/benchmarks/build-analysis.ts",
+    "validate": "npm run build && npm run test:build && npm run test"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^5.0.2",
+    "@astrojs/react": "^5.0.1",
+    "@astrojs/rss": "^4.0.17",
+    "@astrojs/sitemap": "^3.7.1",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^6.0.8",
+    "cmdk": "^1.1.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@playwright/test": "^1.58.2",
+    "pagefind": "^1.4.0",
+    "tsx": "^4.21.0"
+  }
+}

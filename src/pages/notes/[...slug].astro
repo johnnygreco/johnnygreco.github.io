@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('notes', ({ data }) => !data.draft))
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      prev: posts[i + 1] ? { title: posts[i + 1].data.title, url: `/notes/${posts[i + 1].id}/` } : undefined,
+      next: posts[i - 1] ? { title: posts[i - 1].data.title, url: `/notes/${posts[i - 1].id}/` } : undefined,
+    },
+  }));
+}
+
+const { post, prev, next } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BlogPost
+  title={post.data.title}
+  description={post.data.description}
+  date={post.data.date}
+  updatedDate={post.data.updatedDate}
+  tags={post.data.tags}
+  math={post.data.math}
+  prev={prev}
+  next={next}
+  backLabel="All notes"
+  backUrl="/notes/"
+>
+  <Content />
+</BlogPost>

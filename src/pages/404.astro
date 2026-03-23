@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 — Lost in the Cosmos">
+  <section class="relative flex flex-col items-center justify-center min-h-[70vh] overflow-hidden">
+    <canvas id="star-field" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+
+    <div class="relative text-center px-6">
+      <h1 class="font-sans font-semibold text-6xl md:text-8xl text-text mb-4">404</h1>
+      <p class="text-xl text-text-muted mb-2">Lost in the cosmos</p>
+      <p class="text-sm text-text-muted mb-8">This page has drifted beyond the observable universe.</p>
+      <div class="flex gap-4 justify-center">
+        <a href="/" class="btn btn-primary text-sm font-medium px-4 py-2 rounded-lg transition-colors">
+          Take me home
+        </a>
+        <a href="/notes/" class="text-sm font-medium px-4 py-2 border border-border text-text-muted rounded-lg hover:border-accent/50 hover:text-text transition-colors">
+          Explore notes
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const canvas = document.getElementById('star-field') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth < 768;
+    const starCount = isMobile ? 80 : 200;
+
+    const parent = canvas.parentElement!;
+    let width = canvas.width = parent.clientWidth;
+    let height = canvas.height = parent.clientHeight;
+    let mouseX = width / 2;
+    let mouseY = height / 2;
+
+    interface Star {
+      x: number;
+      y: number;
+      size: number;
+      opacity: number;
+      speed: number;
+    }
+
+    const stars: Star[] = Array.from({ length: starCount }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 2 + 0.5,
+      opacity: Math.random() * 0.8 + 0.2,
+      speed: Math.random() * 0.3 + 0.1,
+    }));
+
+    function draw() {
+      ctx!.clearRect(0, 0, width, height);
+      const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim();
+
+      for (const star of stars) {
+        ctx!.beginPath();
+        ctx!.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx!.fillStyle = textColor || '#8a8a9a';
+        ctx!.globalAlpha = star.opacity;
+        ctx!.fill();
+      }
+      ctx!.globalAlpha = 1;
+    }
+
+    function animate() {
+      const dx = (mouseX - width / 2) / width;
+      const dy = (mouseY - height / 2) / height;
+
+      for (const star of stars) {
+        star.x += dx * star.speed * 2;
+        star.y += dy * star.speed * 2;
+        star.opacity += (Math.random() - 0.5) * 0.02;
+        star.opacity = Math.max(0.1, Math.min(0.9, star.opacity));
+
+        if (star.x < 0) star.x = width;
+        if (star.x > width) star.x = 0;
+        if (star.y < 0) star.y = height;
+        if (star.y > height) star.y = 0;
+      }
+
+      draw();
+      requestAnimationFrame(animate);
+    }
+
+    if (prefersReducedMotion) {
+      draw();
+    } else {
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+      });
+      animate();
+    }
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = parent.clientWidth;
+      height = canvas.height = parent.clientHeight;
+    });
+  });
+</script>

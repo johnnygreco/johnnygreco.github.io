@@ -1,0 +1,60 @@
+---
+import type { FeedItem } from '../utils/merge-feeds';
+import { formatDate } from '../utils/format-date';
+
+interface Props {
+  item: FeedItem;
+}
+
+const { item } = Astro.props;
+const isExternal = item.type === 'external';
+
+const typeEmoji = item.type === 'note' ? '📝' : '🔗';
+const typeLabel = item.type === 'note' ? 'Note' : 'External';
+---
+
+<a
+  href={item.url}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener noreferrer' : undefined}
+  class="group block rounded-xl border border-border/60 bg-surface/50 p-5 hover:border-accent/30 hover:bg-surface transition-all duration-200"
+  data-type={item.type}
+>
+  <div class="flex items-center gap-2 mb-3 text-xs text-text-muted">
+    <span>{typeEmoji}</span>
+    <span class="font-medium uppercase tracking-wider">{typeLabel}</span>
+    <span class="opacity-30">·</span>
+    <time datetime={item.date.toISOString()}>
+      {formatDate(item.date)}
+    </time>
+    {isExternal && item.publication && (
+      <>
+        <span class="opacity-30">·</span>
+        <span>{item.publication}</span>
+      </>
+    )}
+  </div>
+
+  <h3 class="text-base font-semibold text-text group-hover:text-accent transition-colors line-clamp-2 leading-snug">
+    {item.title}
+    {isExternal && (
+      <svg class="inline ml-1 w-3 h-3 opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 3h6v6" /><path d="M10 14 21 3" />
+      </svg>
+    )}
+  </h3>
+
+  <p class="text-sm text-text-muted mt-2 line-clamp-2 leading-relaxed">
+    {item.description}
+  </p>
+
+  {item.tags.length > 0 && (
+    <div class="flex flex-wrap gap-1.5 mt-3">
+      {item.tags.slice(0, 3).map((tag) => (
+        <span class="text-xs text-text-muted bg-bg/50 rounded-full px-2 py-0.5">
+          #{tag}
+        </span>
+      ))}
+    </div>
+  )}
+</a>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const [notes, logEntries] = await Promise.all([
+  getCollection('notes', ({ data }) => !data.draft),
+  getCollection('log', ({ data }) => !data.draft),
+]);
+
+const tagCounts = new Map<string, number>();
+for (const post of [...notes, ...logEntries]) {
+  for (const tag of post.data.tags) {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  }
+}
+
+const sortedTags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
+---
+
+<BaseLayout title="Tags — Johnny Greco">
+  <section class="mx-auto max-w-5xl px-6 py-12">
+    <h1 class="font-sans font-semibold text-3xl md:text-4xl mb-8">Tags</h1>
+
+    <div class="flex flex-wrap gap-2">
+      {sortedTags.map(([tag, count]) => (
+        <a
+          href={`/tags/${tag}/`}
+          class="text-sm text-text-muted border border-border rounded-full px-3 py-1.5 hover:border-accent/50 hover:text-accent transition-colors"
+        >
+          {tag} <span class="text-text-muted/50 ml-1">{count}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

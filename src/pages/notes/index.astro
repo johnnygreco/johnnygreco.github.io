@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeedItem from '../../components/FeedItem.astro';
+import { getMergedFeed } from '../../utils/merge-feeds';
+
+const items = await getMergedFeed();
+const hasContent = items.length > 0;
+---
+
+<BaseLayout title="Notes — Johnny Greco" description="Things I'm thinking about and writing up.">
+  <section class="mx-auto max-w-5xl px-6 py-12">
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold">📝 Notes</h1>
+      <p class="text-text-muted mt-2">Things I'm thinking about, writing up, or found worth sharing.</p>
+      {hasContent && items.some(i => i.type === 'external') && (
+        <div class="flex flex-wrap gap-2 mt-4" id="feed-filters">
+          <button data-filter="all" class="text-xs font-medium px-3 py-1 rounded-full border border-accent text-accent cursor-pointer">All</button>
+          <button data-filter="note" class="text-xs font-medium px-3 py-1 rounded-full border border-border text-text-muted hover:border-accent/50 cursor-pointer">Notes</button>
+          <button data-filter="external" class="text-xs font-medium px-3 py-1 rounded-full border border-border text-text-muted hover:border-accent/50 cursor-pointer">External</button>
+        </div>
+      )}
+    </div>
+
+    {hasContent ? (
+      <div id="feed-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {items.map((item) => <FeedItem item={item} />)}
+      </div>
+    ) : (
+      <p class="text-text-muted">Nothing here yet — check back soon! ✨</p>
+    )}
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const filters = document.getElementById('feed-filters');
+    const feedList = document.getElementById('feed-list');
+    if (!filters || !feedList) return;
+
+    const buttons = filters.querySelectorAll('button');
+    const items = feedList.querySelectorAll('[data-type]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        buttons.forEach((b) => {
+          b.classList.remove('border-accent', 'text-accent');
+          b.classList.add('border-border', 'text-text-muted');
+        });
+        btn.classList.remove('border-border', 'text-text-muted');
+        btn.classList.add('border-accent', 'text-accent');
+
+        items.forEach((item) => {
+          const el = item as HTMLElement;
+          if (filter === 'all' || el.getAttribute('data-type') === filter) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        });
+      });
+    });
+  });
+</script>
