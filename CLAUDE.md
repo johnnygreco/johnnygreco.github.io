@@ -37,7 +37,11 @@ Personal website for Johnny Greco at johnnygreco.dev. Built with Astro 6, Tailwi
 
 ## Current state
 
-The site is fully built and functional. All pages render, dark/light theme works, command palette works, Pagefind search works on production builds. A comprehensive test suite (186 tests) covers navigation, content, theme, accessibility, SEO, and performance. The GitHub Actions workflow is written but deployment hasn't been activated yet (branch is still `master`, needs to be renamed to `main`, and Pages source needs to be switched to GitHub Actions in repo settings).
+The site is fully built and functional. All pages render, dark/light theme works, command palette works, Pagefind search works on production builds. A Playwright test suite covers navigation, content, theme, accessibility, SEO, and performance across desktop and mobile viewports.
+
+**Deployment status:** The repo is on `main` and the GitHub Actions workflow is ready. To activate deployment, switch the Pages source to "GitHub Actions" in the repo's GitHub Settings → Pages. This has intentionally not been done yet — the current content is mock/placeholder. The old static site remains live until the switch is flipped.
+
+**Content status:** Notes, log entries, external links, and projects all contain mock content for development. Johnny needs to replace these with real content before activating deployment.
 
 ## Architecture
 
@@ -55,7 +59,7 @@ Both `notes/` and `log/` directories are Obsidian vaults with pre-configured `.o
 
 ```
 src/pages/
-├── index.astro                    → Homepage (intro + explore links + scrollable activity feed)
+├── index.astro                    → Homepage (intro, then 2-col: Explore links + scrollable Activity feed)
 ├── about.astro                    → About page
 ├── projects.astro                 → Projects (data from src/data/projects.ts)
 ├── 404.astro                      → Star field animation 404
@@ -113,15 +117,14 @@ src/pages/
 
 ## What's NOT done
 
-- **Deployment activation** — Branch rename (`master` → `main`) and GitHub Pages source switch to "GitHub Actions" haven't been done yet
-- **Real content** — The notes and log entries are seed/example content. Johnny needs to write real ones.
-- **Projects page** — Only has `beacon` and `hugs` as placeholders. Needs real project data.
+- **Activate deployment** — Switch GitHub Pages source to "GitHub Actions" in repo settings. The workflow and branch (`main`) are ready; this is blocked on real content.
+- **Real content** — Notes, log entries, external links, and projects all contain mock/seed content. Replace with real content before going live.
 - **About page** — Has placeholder bio text. Johnny should review and personalize.
 - **OG image** — No default Open Graph image (`/og-default.png`) has been created yet.
-- **Color contrast** — Accent `#818cf8` on `#0a0a0b` is ~6.1:1 (passes WCAG AA).
 
 ## Key decisions and context
 
+- **Homepage layout** — Below the intro hero, the homepage has a 50/50 two-column grid: "Explore" links on the left (Agent's Log, Notes, Projects, Publications) and a scrollable "Activity" feed on the right. The Activity feed is a fixed-height container (`max-h-[28rem]`) with its own vertical scrollbar, showing all content types sorted by date. On mobile the columns stack (Explore first, then Activity).
 - **Notes vs Agent's Log** — These are intentionally separate content collections. Notes = Johnny's writing. Agent's Log = agent-written only. Both appear in the homepage Activity feed (a unified chronological stream of all content types). Any item can be excluded from the Activity feed via `hideFromActivity: true` in frontmatter.
 - **Obsidian integration** — Both content directories are Obsidian vaults. Obsidian Git plugin is pre-configured but needs to be installed once through Obsidian's UI. Auto-commits every 5 min, auto-pushes every 5 min.
 - **Raw markdown endpoints** — Every log entry has `/log/[slug]/raw.md` serving the original markdown with frontmatter. Content-Type is `text/markdown`. This is for agent consumption.
@@ -141,7 +144,7 @@ All commands run from the repo root (`johnnygreco.github.io/`):
 npm run dev          # start Astro dev server
 npm run build        # production build + pagefind
 npm run preview      # preview production build
-npm test             # run all 186 E2E tests (desktop + mobile)
+npm test             # run E2E tests (desktop + mobile viewports)
 npm run test:build   # analyze build output against budgets
 npm run benchmark    # build timing + build analysis
 npm run validate     # build + analyze + all tests
