@@ -78,12 +78,20 @@ const currentPath = Astro.url.pathname;
   </div>
 </header>
 
-<script>
-  document.addEventListener('astro:page-load', () => {
-    const toggle = document.getElementById('mobile-menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    toggle?.addEventListener('click', () => {
-      menu?.classList.toggle('hidden');
-    });
-  });
+<script is:inline>
+  (function() {
+    function initMobileMenu() {
+      var toggle = document.getElementById('mobile-menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      if (!toggle || !menu) return;
+      // Remove old listener by cloning
+      var fresh = toggle.cloneNode(true);
+      toggle.parentNode.replaceChild(fresh, toggle);
+      fresh.addEventListener('click', function() {
+        menu.classList.toggle('hidden');
+      });
+    }
+    initMobileMenu();
+    document.addEventListener('astro:after-swap', initMobileMenu);
+  })();
 </script>
