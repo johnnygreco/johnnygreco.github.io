@@ -8,7 +8,6 @@ interface PageItem {
 
 const pages: PageItem[] = [
   { label: 'Home', href: '/' },
-  { label: "Agent's Log", href: '/log/' },
   { label: 'Notes', href: '/notes/' },
   { label: 'Projects', href: '/projects/' },
   { label: 'About', href: '/about/' },

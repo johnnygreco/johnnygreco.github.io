@@ -9,7 +9,7 @@ johnnygreco.github.io/                ← repo root, you are here
 ├── src/                              ← all site source code
 │   ├── assets/                       ← images (Astro-optimized)
 │   ├── components/                   ← Astro + React components
-│   ├── content/                      ← content collections (notes, log, external)
+│   ├── content/                      ← content collections (notes, external)
 │   ├── data/                         ← static data (projects.ts)
 │   ├── layouts/                      ← page layouts
 │   ├── pages/                        ← file-based routing
@@ -41,25 +41,24 @@ The site is fully built and functional. All pages render, dark/light theme works
 
 **Deployment status:** The repo is on `main` and the GitHub Actions workflow is ready. To activate deployment, switch the Pages source to "GitHub Actions" in the repo's GitHub Settings → Pages. This has intentionally not been done yet — the current content is mock/placeholder. The old static site remains live until the switch is flipped.
 
-**Content status:** Notes, log entries, external links, and projects all contain mock content for development. Johnny needs to replace these with real content before activating deployment.
+**Content status:** Notes, external links, and projects all contain mock content for development. Johnny needs to replace these with real content before activating deployment.
 
 ## Architecture
 
 **Framework:** Astro 6 with `@astrojs/mdx`, `@astrojs/react` (for interactive islands), `@astrojs/sitemap`, `@astrojs/rss`. Tailwind v4 via `@tailwindcss/vite` (NOT the deprecated `@astrojs/tailwind`). Static output.
 
-**Content model — three collections defined in `src/content.config.ts`:**
+**Content model — two collections defined in `src/content.config.ts`:**
 
-- **notes** (`src/content/notes/*.{md,mdx}`) — Johnny's personal writing. Shows on `/notes/` and homepage Activity feed. Frontmatter: title, description, date, tags, draft, math, updatedDate, hideFromActivity.
-- **log** (`src/content/log/*.md`) — 100% AI-agent-written daily logs. Shows on `/log/` and homepage Activity feed. Each entry gets its own page + a raw markdown endpoint at `/log/[slug]/raw.md`. Frontmatter: title, date, tags, description, draft, hideFromActivity.
-- **external** (`src/content/external/*.md`) — Links to articles published elsewhere. Frontmatter only (no body). Shows in Notes feed and homepage Activity feed. Frontmatter: title, description, date, url, publication, tags, hideFromActivity.
+- **notes** (`src/content/notes/*.{md,mdx}`) — Johnny's personal writing. Shows on `/notes/` and as recent notes cards on the homepage. Frontmatter: title, description, date, tags, draft, math, updatedDate.
+- **external** (`src/content/external/*.md`) — Links to articles published elsewhere. Frontmatter only (no body). Shows in Notes feed and as recent notes cards on the homepage. Frontmatter: title, description, date, url, publication, tags.
 
-Both `notes/` and `log/` directories are Obsidian vaults with pre-configured `.obsidian/` directories (app settings + Obsidian Git plugin config for auto-commit/push every 5 min). The `.obsidian/` dirs and `README.md` files are excluded from content collections via the glob ignore pattern.
+The `notes/` directory is an Obsidian vault with a pre-configured `.obsidian/` directory (app settings + Obsidian Git plugin config for auto-commit/push every 5 min). The `.obsidian/` dir and `README.md` files are excluded from content collections via the glob ignore pattern.
 
 **Pages:**
 
 ```
 src/pages/
-├── index.astro                    → Homepage (intro, then 2-col: Explore links + scrollable Activity feed)
+├── index.astro                    → Homepage (hero card + recent notes grid)
 ├── about.astro                    → About page
 ├── projects.astro                 → Projects (data from src/data/projects.ts)
 ├── 404.astro                      → Star field animation 404
@@ -67,17 +66,12 @@ src/pages/
 ├── notes/
 │   ├── index.astro                → Notes listing
 │   └── [...slug].astro            → Individual note pages
-├── log/
-│   ├── index.astro                → Agent's Log stream (truncated previews, paginated at 20)
-│   └── [...slug]/
-│       ├── index.astro            → Individual log entry pages
-│       └── raw.md.ts              → Raw markdown endpoint for each entry
 └── tags/
     ├── index.astro                → Tag cloud
     └── [tag].astro                → Posts filtered by tag
 ```
 
-**Navigation:** Agent's Log | Notes | Projects | About (defined in `src/components/Header.astro`)
+**Navigation:** Notes | Projects | About (defined in `src/components/Header.astro`)
 
 **Key components:**
 
@@ -87,9 +81,8 @@ src/pages/
 - `ThemeToggle.tsx` — React island, reads/writes localStorage, dark default
 - `CommandPalette.tsx` — React island (`client:only="react"`), uses `cmdk` library. Static page/action items + Pagefind search (loads at runtime from `/pagefind/pagefind.js`, gracefully fails in dev mode)
 - `ReadingProgress.tsx` — React island, thin accent bar on article pages
-- `PrevNext.astro` — Card-style prev/next navigation at bottom of note and log entry pages, with "← All notes" / "← All log entries" back link
-- `FeedItem.astro` — Card component for notes/external items in feeds (used on notes index)
-- `ActivityItem.astro` — Compact list item for the homepage Activity feed (handles all 4 types: note, log, external, project)
+- `PrevNext.astro` — Card-style prev/next navigation at bottom of note pages, with "← All notes" back link
+- `FeedItem.astro` — Card component for notes/external items in feeds (used on notes index and homepage)
 - `DotGrid.astro` — CSS-only subtle dot grid background
 
 **Design system (`src/styles/global.css`):**
@@ -118,22 +111,19 @@ src/pages/
 ## What's NOT done
 
 - **Activate deployment** — Switch GitHub Pages source to "GitHub Actions" in repo settings. The workflow and branch (`main`) are ready; this is blocked on real content.
-- **Real content** — Notes, log entries, external links, and projects all contain mock/seed content. Replace with real content before going live.
+- **Real content** — Notes, external links, and projects all contain mock/seed content. Replace with real content before going live.
 - **About page** — Has placeholder bio text. Johnny should review and personalize.
 - **OG image** — No default Open Graph image (`/og-default.png`) has been created yet.
 
 ## Key decisions and context
 
-- **Homepage layout** — Below the intro hero, the homepage has a 50/50 two-column grid: "Explore" links on the left (Agent's Log, Notes, Projects, Publications) and a scrollable "Activity" feed on the right. The Activity feed is a fixed-height container (`max-h-[28rem]`) with its own vertical scrollbar, showing all content types sorted by date. On mobile the columns stack (Explore first, then Activity).
-- **Notes vs Agent's Log** — These are intentionally separate content collections. Notes = Johnny's writing. Agent's Log = agent-written only. Both appear in the homepage Activity feed (a unified chronological stream of all content types). Any item can be excluded from the Activity feed via `hideFromActivity: true` in frontmatter.
-- **Obsidian integration** — Both content directories are Obsidian vaults. Obsidian Git plugin is pre-configured but needs to be installed once through Obsidian's UI. Auto-commits every 5 min, auto-pushes every 5 min.
-- **Raw markdown endpoints** — Every log entry has `/log/[slug]/raw.md` serving the original markdown with frontmatter. Content-Type is `text/markdown`. This is for agent consumption.
+- **Homepage layout** — The hero section includes a "Project Spotlight" card that randomly features one project on each page load (client-side randomization via `is:inline` script, with `astro:after-swap` for View Transitions). Projects with images show the image; others get a gradient placeholder with the project initial. Below the hero, a grid of recent notes (up to 6) uses `FeedItem` cards. A "View all →" link leads to `/notes/`.
+- **Notes** — Notes are Johnny's personal writing (blog posts, essays). External links are articles published elsewhere. Both appear together in the notes feed and on the homepage.
+- **Obsidian integration** — The notes content directory is an Obsidian vault. Obsidian Git plugin is pre-configured but needs to be installed once through Obsidian's UI. Auto-commits every 5 min, auto-pushes every 5 min.
 - **Sans-serif only** — User explicitly requested no serif fonts anywhere. All headings use Inter (font-sans font-semibold).
 - **Emojis** — Used tastefully in headings and section labels. User likes them but not over the top.
 - **Wider layout** — `max-w-5xl` throughout (not `max-w-3xl`). User didn't like content restricted to a narrow column.
 - **Cards not lists** — Feed items are card-based (rounded-xl border bg-surface), not flat list items.
-- **Log index truncation** — Long log entries show a 250-char plain-text preview on the index page. Full content only on the individual entry page.
-- **Log index pagination** — First 20 entries shown, "Show more" button reveals next 20. All entries are in the HTML (client-side pagination via CSS hidden class).
 - **Theme default** — Dark mode is the default. The `<html>` tag has `data-theme="dark"` in the markup. Theme init script reads localStorage and overrides if the user previously chose light.
 
 ## How to work on this project
@@ -157,17 +147,16 @@ See `DEVELOPMENT.md` for the full guide including content workflows, Obsidian se
 | File | Purpose |
 |------|---------|
 | `astro.config.mjs` | Astro config: site URL, integrations, Tailwind vite plugin, Shiki themes, remark/rehype plugins |
-| `src/content.config.ts` | Content collection schemas (notes, log, external) |
+| `src/content.config.ts` | Content collection schemas (notes, external) |
 | `src/styles/global.css` | All CSS: theme colors, font-face, Tailwind config, prose overrides, Shiki styling |
 | `src/layouts/BaseLayout.astro` | HTML shell used by every page |
 | `src/layouts/BlogPost.astro` | Layout for individual notes (title, date, tags, prose, prev/next) |
-| `src/layouts/LogEntry.astro` | Layout for individual log entries (breadcrumb, raw link, prev/next) |
-| `src/utils/merge-feeds.ts` | `getMergedFeed()` for notes index (notes + external), `getRecentActivity()` for homepage Activity (all 4 types) |
-| `src/data/projects.ts` | Project list data (name, description, url, tags, addedDate, hideFromActivity) |
+| `src/utils/merge-feeds.ts` | `getMergedFeed()` for notes feed (notes + external), used on homepage and notes index |
+| `src/data/projects.ts` | Project list data (name, description, url, tags, addedDate, image) |
 | `.github/workflows/deploy.yml` | GitHub Actions: checkout → npm ci → build → deploy to Pages |
 | `tests/e2e/*.spec.ts` | Playwright E2E tests (navigation, content, theme, a11y, seo, perf) |
 | `tests/benchmarks/build-analysis.ts` | Build output analysis with size budgets |
 | `tests/benchmarks/build-timing.ts` | Build time measurement |
 | `playwright.config.ts` | Playwright config (desktop Chrome + mobile Pixel 7) |
 | `DEVELOPMENT.md` | Human-readable development and content workflow guide |
-| `_templates/` | Example frontmatter for notes, log entries, external links |
+| `_templates/` | Example frontmatter for notes, external links |

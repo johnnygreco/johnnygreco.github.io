@@ -4,7 +4,7 @@
 
 - Node.js 22+ (`brew install node`)
 - Git
-- Obsidian (optional, for writing notes and browsing agent logs)
+- Obsidian (optional, for writing notes)
 
 ## Setup
 
@@ -69,7 +69,7 @@ If you haven't switched to GitHub Actions deployment yet:
 
 ## Writing a note
 
-Notes are your personal writing — blog posts, insights, write-ups. They appear on `/notes/` and in the Activity feed on the homepage.
+Notes are your personal writing — blog posts, insights, write-ups. They appear on `/notes/` and as recent notes on the homepage.
 
 ### Option A: Write in Obsidian (recommended)
 
@@ -111,24 +111,9 @@ So do **bold**, *italic*, [links](https://example.com), and:
    git push
    ```
 
-### Referencing agent log entries
-
-Link to them like any other page:
-
-```markdown
-My agent found something useful about
-[context window strategies](/log/2026-03-21-context-window-strategies/).
-```
-
-The URL pattern is `/log/FILENAME-WITHOUT-EXTENSION/`. Check `/log/` on the site or look at the filenames in `src/content/log/` to get the slugs.
-
 ### Drafts
 
 Set `draft: true` in the frontmatter and the note won't appear on the site. Remove it (or set to `false`) when you're ready to publish.
-
-### Hiding from Activity feed
-
-Set `hideFromActivity: true` in the frontmatter to keep the item off the homepage Activity feed. It will still appear on its own listing page (`/notes/`, `/log/`, etc.).
 
 ### Math
 
@@ -151,48 +136,6 @@ $$
 \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
 $$
 ```
-
----
-
-## Agent's Log
-
-The Agent's Log is at `src/content/log/`. Everything there is meant to be written by AI agents, not by you.
-
-### How agents write log entries
-
-An agent (Claude Code session, script, cron job, whatever) creates a `.md` file and pushes:
-
-```bash
-cat > src/content/log/2026-03-22-what-i-learned.md << 'EOF'
----
-title: "What I learned about fine-tuning"
-date: 2026-03-22
-tags: ["fine-tuning", "lora"]
----
-
-Today I explored different approaches to LoRA adapter merging...
-EOF
-
-git add src/content/log/2026-03-22-what-i-learned.md
-git commit -m "agent log: what I learned about fine-tuning"
-git push
-```
-
-The file naming convention is `YYYY-MM-DD-slug.md`. Multiple entries per day use different slugs.
-
-### Browsing agent logs in Obsidian
-
-You can open `src/content/log/` as a vault in Obsidian to read and search through agent logs. Same Obsidian Git setup as Notes — install the plugin once, config is pre-set.
-
-### Raw markdown access
-
-Every log entry is available as raw markdown at its URL + `/raw.md`:
-
-```bash
-curl https://johnnygreco.dev/log/2026-03-22-what-i-learned/raw.md
-```
-
-This is useful for agents or scripts that want to read log entries programmatically.
 
 ---
 
@@ -230,7 +173,6 @@ src/pages/index.astro        → homepage
 src/pages/about.astro         → /about/
 src/pages/projects.astro      → /projects/
 src/pages/notes/index.astro   → /notes/
-src/pages/log/index.astro     → /log/
 src/pages/404.astro            → 404 page
 ```
 
@@ -254,7 +196,7 @@ Font files are in `public/fonts/`. `@font-face` declarations are in `src/styles/
 
 ### Updating projects
 
-Edit `src/data/projects.ts` — it's a simple array of objects. Each project has a `name`, `description`, `url`, `tags`, `addedDate`, and optional `hideFromActivity`.
+Edit `src/data/projects.ts` — it's a simple array of objects. Each project has a `name`, `description`, `url`, `tags`, `addedDate`, and optional `image`.
 
 ---
 
@@ -267,7 +209,6 @@ johnnygreco.github.io/          ← repo root (run all commands from here)
 │   ├── components/             → Reusable UI components
 │   ├── content/
 │   │   ├── notes/              → Your notes (Obsidian vault)
-│   │   ├── log/                → Agent's Log (Obsidian vault)
 │   │   └── external/           → External link entries
 │   ├── content.config.ts       → Content collection schemas
 │   ├── data/                   → Static data (projects list)
@@ -292,7 +233,7 @@ johnnygreco.github.io/          ← repo root (run all commands from here)
 
 ## Content collection schemas
 
-These are defined in `src/content.config.ts`. If you want to add a new frontmatter field to notes or logs, update the Zod schema there.
+These are defined in `src/content.config.ts`. If you want to add a new frontmatter field, update the Zod schema there.
 
 **Notes** (`src/content/notes/*.md` or `*.mdx`):
 | Field | Type | Required | Default |
@@ -304,17 +245,6 @@ These are defined in `src/content.config.ts`. If you want to add a new frontmatt
 | `draft` | boolean | no | `false` |
 | `math` | boolean | no | `false` |
 | `updatedDate` | date | no | — |
-| `hideFromActivity` | boolean | no | `false` |
-
-**Agent's Log** (`src/content/log/*.md`):
-| Field | Type | Required | Default |
-|-------|------|----------|---------|
-| `title` | string | yes | — |
-| `date` | date | yes | — |
-| `tags` | string[] | no | `[]` |
-| `description` | string | no | — |
-| `draft` | boolean | no | `false` |
-| `hideFromActivity` | boolean | no | `false` |
 
 **External** (`src/content/external/*.md`):
 | Field | Type | Required | Default |
@@ -325,13 +255,12 @@ These are defined in `src/content.config.ts`. If you want to add a new frontmatt
 | `url` | string (URL) | yes | — |
 | `publication` | string | yes | — |
 | `tags` | string[] | no | `[]` |
-| `hideFromActivity` | boolean | no | `false` |
 
 ---
 
 ## Obsidian setup (one-time, per vault)
 
-This applies to both the Notes vault (`src/content/notes/`) and the Agent's Log vault (`src/content/log/`).
+This applies to the Notes vault (`src/content/notes/`).
 
 1. In Obsidian: File → Open vault → Open folder as vault → select the directory
 2. When prompted, click "Trust author and enable plugins"

@@ -13,7 +13,7 @@ const BUDGETS = {
   maxRequests: 40,
 };
 
-const PAGES_TO_BENCHMARK = ['/', '/notes/', '/log/', '/about/', '/projects/'];
+const PAGES_TO_BENCHMARK = ['/', '/notes/', '/about/', '/projects/'];
 
 test.describe('Page load performance', () => {
   for (const path of PAGES_TO_BENCHMARK) {

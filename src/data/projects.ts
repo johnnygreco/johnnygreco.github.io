@@ -7,7 +7,6 @@ export interface Project {
   tags: string[];
   image?: ImageMetadata;
   addedDate: Date;
-  hideFromActivity?: boolean;
 }
 
 export const projects: Project[] = [

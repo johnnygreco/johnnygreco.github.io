@@ -7,19 +7,18 @@ test.describe('Homepage', () => {
     await expect(page.locator('text=AI engineer')).toBeVisible();
   });
 
-  test('shows quick link cards', async ({ page }) => {
+  test('shows project spotlight', async ({ page }) => {
     await page.goto('/');
-    // Scope to main content to avoid matching header nav links
-    await expect(page.locator('main a[href="/log/"]').first()).toBeVisible();
-    await expect(page.locator('main a[href="/notes/"]').first()).toBeVisible();
-    await expect(page.locator('main a[href="/projects/"]').first()).toBeVisible();
+    await expect(page.locator('text=Project Spotlight')).toBeVisible();
+    // One of the spotlight cards should be visible
+    const visibleCards = page.locator('[data-spotlight]:not(.hidden)');
+    await expect(visibleCards).toHaveCount(1);
   });
 
-  test('shows recent activity section', async ({ page }) => {
+  test('shows recent notes section', async ({ page }) => {
     await page.goto('/');
-    const recentSection = page.locator('text=Recent activity');
-    // May or may not exist depending on content — just check page loads
-    expect(await page.locator('main').innerHTML()).toBeTruthy();
+    await expect(page.locator('text=Recent Notes')).toBeVisible();
+    await expect(page.locator('main a[href="/notes/"]').first()).toBeVisible();
   });
 });
 
@@ -73,77 +72,6 @@ test.describe('Individual note page', () => {
       // Should have prose content
       await expect(page.locator('.prose, article').first()).toBeVisible();
     }
-  });
-});
-
-test.describe("Agent's Log page", () => {
-  test('lists log entries grouped by month', async ({ page }) => {
-    await page.goto('/log/');
-    await expect(page.locator('h1')).toContainText("Agent's Log");
-
-    // Should have at least one entry
-    const entries = page.locator('.log-entry');
-    await expect(entries.first()).toBeVisible();
-
-    // Should have month group headers
-    const monthHeaders = page.locator('.log-month-group h2');
-    await expect(monthHeaders.first()).toBeVisible();
-  });
-
-  test('log entries have title, date, and preview', async ({ page }) => {
-    await page.goto('/log/');
-    const firstEntry = page.locator('.log-entry').first();
-
-    // Title
-    await expect(firstEntry.locator('h3')).toBeVisible();
-    // Date
-    await expect(firstEntry.locator('time')).toBeVisible();
-  });
-
-  test('entry count is shown', async ({ page }) => {
-    await page.goto('/log/');
-    await expect(page.locator('text=/\\d+ entr(y|ies) total/')).toBeVisible();
-  });
-});
-
-test.describe('Individual log entry page', () => {
-  test('log entry renders with full content', async ({ page }) => {
-    await page.goto('/log/');
-    const firstEntry = page.locator('.log-entry').first();
-    const href = await firstEntry.getAttribute('href');
-    await page.goto(href!);
-
-    // Should have title
-    await expect(page.locator('article h1, main h1').first()).toBeVisible();
-    // Should have content
-    await expect(page.locator('.prose, article').first()).toBeVisible();
-  });
-
-  test('raw markdown endpoint works', async ({ page }) => {
-    await page.goto('/log/');
-    const firstEntry = page.locator('.log-entry').first();
-    const href = await firstEntry.getAttribute('href');
-
-    // Fetch the raw markdown endpoint
-    const rawUrl = href + 'raw.md';
-    const response = await page.goto(rawUrl);
-    expect(response?.status()).toBe(200);
-
-    const contentType = response?.headers()['content-type'] || '';
-    expect(contentType).toContain('text/markdown');
-
-    const body = await response?.text();
-    expect(body).toContain('---'); // Has frontmatter
-  });
-
-  test('prev/next navigation exists', async ({ page }) => {
-    await page.goto('/log/');
-    const firstEntry = page.locator('.log-entry').first();
-    const href = await firstEntry.getAttribute('href');
-    await page.goto(href!);
-
-    // Should have back link to all entries (in main content, not header)
-    await expect(page.locator('main a[href="/log/"]').first()).toBeVisible();
   });
 });
 

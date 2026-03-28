@@ -3,7 +3,6 @@ import { test, expect } from '@playwright/test';
 const PAGES = [
   { path: '/', title: 'Johnny Greco' },
   { path: '/notes/', title: 'Notes' },
-  { path: '/log/', title: "Agent's Log" },
   { path: '/projects/', title: 'Projects' },
   { path: '/about/', title: 'About' },
   { path: '/tags/', title: 'Tags' },
@@ -36,7 +35,6 @@ test.describe('Header navigation', () => {
     }
 
     const navLinks = [
-      { text: "Agent's Log", href: '/log/' },
       { text: 'Notes', href: '/notes/' },
       { text: 'Projects', href: '/projects/' },
       { text: 'About', href: '/about/' },

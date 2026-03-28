@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DotGrid from '../components/DotGrid.astro';
-import ActivityItem from '../components/ActivityItem.astro';
-import { getRecentActivity } from '../utils/merge-feeds';
+import FeedItem from '../components/FeedItem.astro';
+import { getMergedFeed } from '../utils/merge-feeds';
+import { projects } from '../data/projects';
 import { Image } from 'astro:assets';
 import meImage from '../assets/me.png';
 
-const allItems = await getRecentActivity();
+const recentNotes = (await getMergedFeed()).slice(0, 6);
 ---
 
 <BaseLayout title="Johnny Greco">
@@ -49,44 +50,81 @@ const allItems = await getRecentActivity();
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Explore + Activity -->
-  <section class="mx-auto max-w-5xl px-6 py-12 border-t border-border">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <!-- Explore -->
-      <div>
-        <h2 class="text-sm font-semibold text-text-muted uppercase tracking-wider mb-4">🧭 Explore</h2>
-        <div class="grid grid-cols-1 gap-3">
-          <a href="/log/" class="group p-4 rounded-xl border border-border bg-surface/50 hover:border-accent/40 transition-all">
-            <h3 class="font-semibold text-text group-hover:text-accent transition-colors">🤖 Agent's Log</h3>
-            <p class="text-sm text-text-muted mt-1">Written by my agents, for curious humans and their agents.</p>
+      <!-- Project Spotlight -->
+      <div class="mt-12 max-w-2xl" id="project-spotlight">
+        <h2 class="text-xs font-semibold text-text-muted uppercase tracking-wider mb-3">🔦 Project Spotlight</h2>
+        {projects.map((project) => (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden group rounded-xl border border-border/60 bg-surface/50 hover:border-accent/30 hover:bg-surface transition-all duration-200 overflow-hidden"
+            data-spotlight
+          >
+            <div class="flex flex-col sm:flex-row">
+              <div class="sm:w-48 flex-shrink-0 border-b sm:border-b-0 sm:border-r border-border/40">
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    width={192}
+                    height={128}
+                    class="w-full h-32 sm:h-full object-cover"
+                  />
+                ) : (
+                  <div class="w-full h-32 sm:h-full min-h-[8rem] bg-gradient-to-br from-accent/10 to-accent/5 flex items-center justify-center">
+                    <span class="text-4xl font-bold text-accent/25">{project.name.charAt(0).toUpperCase()}</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-4 flex-1 min-w-0">
+                <h3 class="font-semibold text-text group-hover:text-accent transition-colors flex items-center gap-2">
+                  {project.name}
+                  <svg class="w-3 h-3 opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h6v6" /><path d="M10 14 21 3" />
+                  </svg>
+                </h3>
+                <p class="text-sm text-text-muted mt-1.5 leading-relaxed line-clamp-2">{project.description}</p>
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                  {project.tags.map((tag) => (
+                    <span class="text-xs text-text-muted bg-bg/50 rounded-full px-2 py-0.5">#{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </a>
-          <a href="/notes/" class="group p-4 rounded-xl border border-border bg-surface/50 hover:border-accent/40 transition-all">
-            <h3 class="font-semibold text-text group-hover:text-accent transition-colors">📝 Notes</h3>
-            <p class="text-sm text-text-muted mt-1">Stuff I'm thinking about, writing up, or found interesting.</p>
-          </a>
-          <a href="/projects/" class="group p-4 rounded-xl border border-border bg-surface/50 hover:border-accent/40 transition-all">
-            <h3 class="font-semibold text-text group-hover:text-accent transition-colors">🏗️ Projects</h3>
-            <p class="text-sm text-text-muted mt-1">Open source and side projects.</p>
-          </a>
-          <a href="https://scholar.google.com/citations?user=CDWpgoAAAAAJ" target="_blank" rel="noopener noreferrer" class="group p-4 rounded-xl border border-border bg-surface/50 hover:border-accent/40 transition-all">
-            <h3 class="font-semibold text-text group-hover:text-accent transition-colors">📚 Publications</h3>
-            <p class="text-sm text-text-muted mt-1">Academic papers from a past life in astronomy.</p>
-          </a>
-        </div>
+        ))}
       </div>
-
-      <!-- Activity -->
-      {allItems.length > 0 && (
-        <div>
-          <h2 class="text-sm font-semibold text-text-muted uppercase tracking-wider mb-4">📡 Activity</h2>
-          <div class="max-h-[28rem] overflow-y-auto pr-2">
-            {allItems.map((item) => <ActivityItem item={item} />)}
-          </div>
-        </div>
-      )}
     </div>
   </section>
+
+  <script is:inline>
+    (function() {
+      function pickSpotlight() {
+        var cards = document.querySelectorAll('[data-spotlight]');
+        if (cards.length === 0) return;
+        var idx = Math.floor(Math.random() * cards.length);
+        for (var i = 0; i < cards.length; i++) {
+          if (i === idx) cards[i].classList.remove('hidden');
+          else cards[i].classList.add('hidden');
+        }
+      }
+      pickSpotlight();
+      document.addEventListener('astro:after-swap', pickSpotlight);
+    })();
+  </script>
+
+  <!-- Recent Notes -->
+  {recentNotes.length > 0 && (
+    <section class="mx-auto max-w-5xl px-6 py-12 border-t border-border">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-sm font-semibold text-text-muted uppercase tracking-wider">📝 Recent Notes</h2>
+        <a href="/notes/" class="text-sm text-accent hover:text-accent-hover transition-colors">View all →</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {recentNotes.map((item) => <FeedItem item={item} />)}
+      </div>
+    </section>
+  )}
 </BaseLayout>

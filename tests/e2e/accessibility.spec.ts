@@ -4,7 +4,6 @@ import AxeBuilder from '@axe-core/playwright';
 const PAGES_TO_AUDIT = [
   '/',
   '/notes/',
-  '/log/',
   '/projects/',
   '/about/',
   '/tags/',

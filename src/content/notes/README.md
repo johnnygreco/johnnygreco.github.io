@@ -25,14 +25,6 @@ tags: ["topic"]
 Your content here. Standard markdown.
 ```
 
-## Referencing agent log entries
-
-Just link to them:
-
-```markdown
-My agent found something interesting about [context window strategies](/log/2026-03-21-context-window-strategies/).
-```
-
 ## Obsidian setup
 
 1. Open this folder as a vault in Obsidian

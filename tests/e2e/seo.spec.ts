@@ -3,7 +3,6 @@ import { test, expect } from '@playwright/test';
 const PAGES = [
   { path: '/', titleContains: 'Johnny Greco' },
   { path: '/notes/', titleContains: 'Notes' },
-  { path: '/log/', titleContains: "Agent's Log" },
   { path: '/projects/', titleContains: 'Projects' },
   { path: '/about/', titleContains: 'About' },
 ];
