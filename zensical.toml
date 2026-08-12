@@ -1,0 +1,74 @@
+[project]
+site_name = "Johnny Greco"
+site_url = "https://johnnygreco.dev/"
+site_description = "Johnny Greco — applied machine learning scientist and writer."
+site_author = "Johnny Greco"
+site_dir = "site"
+copyright = "&copy; 2026 Johnny Greco"
+extra_css = ["stylesheets/extra.css"]
+nav = [
+  { "Home" = "index.md" },
+  { "Writing" = [
+    { "A new home for my writing" = "writing/new-home.md" },
+  ] },
+]
+
+[project.theme]
+variant = "modern"
+custom_dir = "overrides"
+favicon = "favicon.svg"
+language = "en"
+features = [
+  "navigation.top",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Use light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Use dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Use system theme"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/johnnygreco"
+name = "Johnny Greco on GitHub"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/linkedin"
+link = "https://linkedin.com/in/johnnygreco"
+name = "Johnny Greco on LinkedIn"
+
+[[project.extra.social]]
+icon = "fontawesome/solid/graduation-cap"
+link = "https://scholar.google.com/citations?user=CDWpgoAAAAAJ"
+name = "Johnny Greco on Google Scholar"
+
+[[project.extra.social]]
+icon = "fontawesome/solid/envelope"
+link = "mailto:jgreco.ai@gmail.com"
+name = "Email Johnny Greco"
+
+[project.extra]
+generator = true
+
+[project.markdown_extensions]
+attr_list = {}
+md_in_html = {}
+pymdownx.magiclink = {}
+pymdownx.superfences = {}
+zensical.extensions.macros = {
+  include_yaml = ["data/writing.yml"],
+  on_error_fail = true,
+  on_undefined = "strict",
+}

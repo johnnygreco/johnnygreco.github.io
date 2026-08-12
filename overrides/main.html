@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block htmltitle %}
+  {% if page and page.title == config.site_name %}
+    <title>Johnny Greco</title>
+  {% else %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
+{% block extrahead %}
+  {{ super() }}
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Johnny Greco" />
+  <meta property="og:image" content="https://johnnygreco.dev/assets/me.png" />
+  <meta name="twitter:card" content="summary" />
+{% endblock %}

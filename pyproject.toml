@@ -1,0 +1,9 @@
+[project]
+name = "johnnygreco-site"
+version = "0.1.0"
+description = "Johnny Greco's personal website"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "zensical==0.0.53",
+]

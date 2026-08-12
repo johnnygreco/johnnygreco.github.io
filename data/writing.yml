@@ -1,0 +1,16 @@
+# Add new entries at the top. Set external to true for writing hosted elsewhere.
+writing:
+  - title: A new home for my writing
+    description: A short note about rebuilding this site and making room for things I write here and elsewhere.
+    date: August 12, 2026
+    source: johnnygreco.dev
+    url: writing/new-home/
+    external: false
+
+# Example external entry:
+#   - title: Your article title
+#     description: A sentence telling readers what the piece is about.
+#     date: September 1, 2026
+#     source: Publication name
+#     url: https://example.com/your-article
+#     external: true

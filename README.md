@@ -1,47 +1,50 @@
 # johnnygreco.dev
 
-Personal website for Johnny Greco — AI engineer and former astronomer.
+Johnny Greco's personal website, built with [Zensical](https://zensical.org/).
+The homepage keeps the small, personal feel of the original site and adds a
+card-based list of recent writing from this site and elsewhere.
 
-Built with Astro 6, Tailwind v4, React islands, and deployed to GitHub Pages via GitHub Actions. Dark mode default, command palette with Pagefind search, Obsidian-powered content workflow.
+## Run it locally
 
-**Status:** Code is complete, mock content in place. Real content TBD. Deployment not yet activated.
-
-## Quick start
+You need Python 3.10+ and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-npm install
-npm run dev       # http://localhost:4321
+uv sync
+uv run zensical serve
 ```
 
-## Scripts
+Open <http://127.0.0.1:8000>. To make a production build:
 
-| Command | Action |
-|---------|--------|
-| `npm run dev` | Start dev server with hot reload |
-| `npm run build` | Production build + Pagefind search index |
-| `npm run preview` | Preview production build locally |
-| `npm test` | Run E2E tests (Playwright, desktop + mobile) |
-| `npm run test:build` | Analyze build output against size budgets |
-| `npm run benchmark` | Build timing + build analysis |
-| `npm run validate` | Build + analyze + test everything |
+```bash
+uv run zensical build --clean
+```
 
-## Content
+The generated site is written to `site/`.
 
-Content lives in `src/content/` as markdown files organized into three collections:
+## Add recent writing
 
-- **Notes** (`src/content/notes/`) — Personal writing, shows on `/notes/` and homepage Activity feed
-- **Agent's Log** (`src/content/log/`) — AI-agent-written logs, shows on `/log/` and Activity feed
-- **External** (`src/content/external/`) — Links to articles published elsewhere
+Edit `data/writing.yml` and add the newest item at the top:
 
-Both Notes and Agent's Log directories are Obsidian vaults with auto-commit/push pre-configured. See [DEVELOPMENT.md](DEVELOPMENT.md) for content workflows.
+```yaml
+writing:
+  - title: Your article title
+    description: A short description for the card.
+    date: September 1, 2026
+    source: Publication name
+    url: https://example.com/your-article
+    external: true
+```
 
-## Deployment
+Use `external: false` and a relative URL such as `writing/my-piece/` for a
+piece hosted here. Then create `docs/writing/my-piece.md` with regular Markdown.
 
-Push to `main` triggers GitHub Actions → builds → deploys `dist/` to GitHub Pages. Tests, docs, and dev tooling in the repo are invisible to the deployed site.
+## Important files
 
-**First-time activation:** Go to repo Settings → Pages → Source → select "GitHub Actions".
+- `zensical.toml` — site, navigation, theme, and extension configuration
+- `data/writing.yml` — homepage writing cards
+- `docs/` — Markdown pages and static assets
+- `docs/stylesheets/extra.css` — visual design
+- `overrides/main.html` — small metadata/title overrides
+- `.github/workflows/deploy.yml` — GitHub Pages deployment
 
-## Docs
-
-- **[DEVELOPMENT.md](DEVELOPMENT.md)** — Full dev guide: setup, content workflows, Obsidian config, editing site code, troubleshooting
-- **[CLAUDE.md](CLAUDE.md)** — Architecture, key decisions, and context for AI agents working on this codebase
+Deployment is intentionally manual until the new site is approved for launch.
