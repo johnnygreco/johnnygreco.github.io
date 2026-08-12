@@ -24,21 +24,26 @@
     "validate": "npm run build && npm run test:build && npm run test"
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.2",
-    "@astrojs/react": "^5.0.1",
-    "@astrojs/rss": "^4.0.17",
-    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/react": "^6.0.2",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.2",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "astro": "^6.0.8",
+    "astro": "^7.2.1",
     "cmdk": "^1.1.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "tailwindcss": "^4.2.2"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1",
+    "sharp": "0.35.3",
+    "vite": "^8.0.16"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.1",
