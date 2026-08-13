@@ -244,9 +244,9 @@ if [ "${UNINSTALL:-}" = "1" ]; then
         echo "Removing ${INSTALL_DIR}/beacon (requires sudo)..."
         sudo rm "${INSTALL_DIR}/beacon"
     fi
-    if [ -d "${HOME}/.beacon" ]; then
-        rm -rf "${HOME}/.beacon"
-        echo "Removed ~/.beacon data directory"
+    if [ -d "${BEACON_HOME}" ]; then
+        rm -rf "${BEACON_HOME}"
+        echo "Removed ${BEACON_HOME} data directory"
     fi
     echo "beacon uninstalled"
     exit 0

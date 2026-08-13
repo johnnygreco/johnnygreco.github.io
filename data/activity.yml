@@ -1,23 +1,21 @@
-# Add new entries at the top. Set external to true for writing hosted elsewhere.
-writing:
+activity:
   - title: "Have It Your Way: Customizing Data Designer with Plugins"
     description: A plugin framework for the custom pieces every real project ends up needing.
-    date: 2026
+    kind: Writing
     source: NVIDIA NeMo Data Designer
     url: https://docs.nvidia.com/nemo/datadesigner/dev-notes/have-it-your-way
     external: true
 
   - title: Data Designer Got Skills
     description: Lessons from building and benchmarking an agent-first CLI and skill for Data Designer.
-    date: 2026
+    kind: Writing
     source: NVIDIA NeMo Data Designer
     url: https://docs.nvidia.com/nemo/datadesigner/dev-notes/data-designer-got-skills
     external: true
 
-# Example external entry:
-#   - title: Your article title
-#     description: A sentence telling readers what the piece is about.
-#     date: September 1, 2026
-#     source: Publication name
-#     url: https://example.com/your-article
-#     external: true
+  - title: Leading OpenShell Research
+    description: A new research team and open journal for research engineering built on the OpenShell runtime.
+    kind: Research
+    source: NVIDIA
+    url: https://github.com/NVIDIA/OpenShell-Research
+    external: true

@@ -1,0 +1,40 @@
+projects:
+  - name: OpenShell Research
+    owner: NVIDIA
+    description: An open research journal for engineering work that uses OpenShell as its safe, private runtime for autonomous AI agents.
+    url: https://github.com/NVIDIA/OpenShell-Research
+    image: assets/projects/openshell-research.png
+    language: Python
+    accent: green
+
+  - name: ArtPop
+    owner: ArtificialStellarPopulations
+    description: Build realistic, image-based models of resolved stellar populations and artificial galaxies—one star at a time.
+    url: https://github.com/ArtificialStellarPopulations/ArtPop
+    image: assets/projects/artpop.png
+    language: Python
+    accent: violet
+
+  - name: Beacon
+    owner: johnnygreco
+    description: Real-time signals for AI agents, with a lightweight Go server for seeing what distributed agents are doing as it happens.
+    url: https://github.com/johnnygreco/beacon
+    image: assets/projects/beacon.png
+    language: Go
+    accent: amber
+
+  - name: Data Designer
+    owner: NVIDIA-NeMo
+    description: Generate high-quality synthetic data from scratch or from seed data with a flexible, open-source framework.
+    url: https://github.com/NVIDIA-NeMo/DataDesigner
+    image: assets/projects/data-designer.png
+    language: Python
+    accent: green
+
+  - name: midiGPT
+    owner: johnnygreco
+    description: A decoder-only transformer for generating music as MIDI, built from scratch with PyTorch.
+    url: https://github.com/johnnygreco/midiGPT
+    image: assets/projects/midigpt.png
+    language: Python
+    accent: blue

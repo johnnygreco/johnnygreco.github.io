@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block htmltitle %}
-  {% if page and page.title == config.site_name %}
+  {% if page and page.title == "Johnny Greco" %}
     <title>Johnny Greco</title>
   {% else %}
     {{ super() }}
@@ -14,4 +14,180 @@
   <meta property="og:site_name" content="Johnny Greco" />
   <meta property="og:image" content="https://johnnygreco.dev/assets/me.png" />
   <meta name="twitter:card" content="summary" />
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    (() => {
+      const skipLink = document.querySelector('.md-skip');
+      const skipTarget = skipLink
+        ? document.querySelector(decodeURIComponent(skipLink.hash))
+        : null;
+      if (skipTarget) {
+        skipTarget.tabIndex = -1;
+        skipLink.addEventListener('click', () => {
+          requestAnimationFrame(() => skipTarget.focus());
+        });
+      }
+
+      const interactiveLabels = document.querySelectorAll(
+        '.md-header label[for="__drawer"], .md-header label[for="__search"], .md-header__option label'
+      );
+
+      for (const label of interactiveLabels) {
+        label.tabIndex = 0;
+        label.setAttribute('role', 'button');
+        label.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            event.stopPropagation();
+            label.click();
+            if (label.closest('.md-header__option')) {
+              requestAnimationFrame(() => {
+                const visibleLabel = Array.from(
+                  document.querySelectorAll('.md-header__option label')
+                ).find((item) => item.offsetParent);
+                visibleLabel?.classList.add('jg-keyboard-focus');
+                visibleLabel?.focus();
+              });
+            }
+          }
+        });
+      }
+
+      for (const input of document.querySelectorAll('.md-header__option .md-option')) {
+        input.tabIndex = -1;
+      }
+
+      document.addEventListener('pointerdown', () => {
+        for (const label of document.querySelectorAll('.jg-keyboard-focus')) {
+          label.classList.remove('jg-keyboard-focus');
+        }
+      });
+
+      const drawer = document.querySelector('#__drawer');
+      const drawerTrigger = document.querySelector('.md-header label[for="__drawer"]');
+      const search = document.querySelector('#__search');
+      const searchTrigger = document.querySelector('.md-header label[for="__search"]');
+      const searchControls = Array.from(
+        document.querySelectorAll('.md-header label[for="__search"], .md-search__button')
+      );
+      let searchReturnTarget = null;
+      const drawerFocusables = Array.from(
+        document.querySelectorAll('.md-sidebar--primary a, .md-sidebar--primary label')
+      );
+      const drawerItems = Array.from(
+        document.querySelectorAll(
+          '.md-sidebar--primary a.md-nav__link, .md-sidebar--primary label.md-nav__link'
+        )
+      );
+      let drawerWasOpen = false;
+      const syncDrawerFocus = () => {
+        const usesDrawer = Boolean(drawerTrigger && drawerTrigger.offsetParent);
+        if (!usesDrawer && drawer?.checked) drawer.checked = false;
+        const drawerIsOpen = usesDrawer && Boolean(drawer && drawer.checked);
+        const enabled = !usesDrawer || drawerIsOpen;
+        for (const item of drawerFocusables) item.tabIndex = -1;
+        if (enabled) {
+          for (const item of drawerItems) item.tabIndex = 0;
+          if (!usesDrawer) {
+            for (const item of drawerFocusables) {
+              if (item.matches('a, label.md-nav__link')) item.tabIndex = 0;
+            }
+          }
+        }
+        drawerTrigger?.setAttribute('aria-expanded', String(drawerIsOpen));
+
+        if (drawerIsOpen && !drawerWasOpen) {
+          requestAnimationFrame(() => {
+            document.querySelector('.md-sidebar--primary a.md-nav__link')?.focus();
+          });
+        } else if (!drawerIsOpen && drawerWasOpen && usesDrawer) {
+          drawerTrigger?.focus();
+        }
+
+        drawerWasOpen = drawerIsOpen;
+      };
+
+      if (drawer) {
+        syncDrawerFocus();
+        drawer.addEventListener('change', syncDrawerFocus);
+        window.addEventListener('resize', syncDrawerFocus);
+      }
+
+      const setSearchExpanded = (expanded) => {
+        for (const control of searchControls) {
+          control.setAttribute('aria-expanded', String(expanded));
+        }
+      };
+      const visibleSearchControl = () =>
+        searchControls.find((control) => control.offsetParent) || searchTrigger;
+
+      for (const control of searchControls) {
+        control.addEventListener('pointerdown', () => {
+          searchReturnTarget = control;
+          setSearchExpanded(true);
+        });
+        control.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            searchReturnTarget = control;
+            setSearchExpanded(true);
+          }
+        });
+      }
+
+      setSearchExpanded(Boolean(search?.checked));
+      search?.addEventListener('change', () => {
+        setSearchExpanded(search.checked);
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && (search?.checked || searchReturnTarget)) {
+          if (search?.checked) {
+            search.checked = false;
+            search.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+          const returnTarget = searchReturnTarget?.offsetParent
+            ? searchReturnTarget
+            : visibleSearchControl();
+          setSearchExpanded(false);
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            returnTarget?.focus();
+            searchReturnTarget = null;
+          }));
+        }
+
+        const usesDrawer = Boolean(drawerTrigger && drawerTrigger.offsetParent);
+        if (!usesDrawer || !drawer?.checked) return;
+
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          drawer.checked = false;
+          drawer.dispatchEvent(new Event('change', { bubbles: true }));
+          return;
+        }
+
+        if (event.key !== 'Tab') return;
+        const focusableItems = drawerItems.filter(
+          (item) => item.tabIndex >= 0 && item.offsetParent
+        );
+        if (!focusableItems.length) return;
+
+        const first = focusableItems[0];
+        const last = focusableItems[focusableItems.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        } else if (!focusableItems.includes(document.activeElement)) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
+
+    })();
+  </script>
 {% endblock %}

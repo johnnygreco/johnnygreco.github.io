@@ -1,16 +1,15 @@
 [project]
-site_name = "Johnny Greco"
+site_name = "👋 Hi, I’m Johnny"
 site_url = "https://johnnygreco.dev/"
 site_description = "Johnny Greco — applied machine learning scientist and writer."
 site_author = "Johnny Greco"
 site_dir = "site"
-copyright = "&copy; 2026 Johnny Greco"
-extra_css = ["stylesheets/extra.css"]
+extra_css = ["stylesheets/site-v4.css"]
 nav = [
   { "Home" = "index.md" },
-  { "Writing" = [
-    { "A new home for my writing" = "writing/new-home.md" },
-  ] },
+  { "Activity" = "activity.md" },
+  { "Writing" = "writing/index.md" },
+  { "Projects" = "projects/index.md" },
 ]
 
 [project.theme]
@@ -18,7 +17,9 @@ variant = "modern"
 custom_dir = "overrides"
 favicon = "favicon.svg"
 language = "en"
+font = false
 features = [
+  "navigation.indexes",
   "navigation.top",
 ]
 
@@ -60,7 +61,7 @@ link = "mailto:jgreco.ai@gmail.com"
 name = "Email Johnny Greco"
 
 [project.extra]
-generator = true
+generator = false
 
 [project.markdown_extensions]
 attr_list = {}
@@ -68,7 +69,7 @@ md_in_html = {}
 pymdownx.magiclink = {}
 pymdownx.superfences = {}
 zensical.extensions.macros = {
-  include_yaml = ["data/writing.yml"],
+  include_yaml = ["data/writing.yml", "data/activity.yml", "data/projects.yml"],
   on_error_fail = true,
   on_undefined = "strict",
 }
