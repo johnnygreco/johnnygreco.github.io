@@ -24,21 +24,14 @@ features = [
 ]
 
 [[project.theme.palette]]
-media = "(prefers-color-scheme)"
-toggle.icon = "lucide/sun-moon"
-toggle.name = "Use light mode"
-
-[[project.theme.palette]]
-media = "(prefers-color-scheme: light)"
 scheme = "default"
 toggle.icon = "lucide/sun"
 toggle.name = "Use dark mode"
 
 [[project.theme.palette]]
-media = "(prefers-color-scheme: dark)"
 scheme = "slate"
 toggle.icon = "lucide/moon"
-toggle.name = "Use system theme"
+toggle.name = "Use light mode"
 
 [[project.extra.social]]
 icon = "fontawesome/brands/github"
