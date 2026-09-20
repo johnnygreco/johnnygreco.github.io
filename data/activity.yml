@@ -1,6 +1,7 @@
 activity:
   - title: "NeMo Data Designer: An Extensible Framework for Multimodal Synthetic Data Generation"
     description: An open-source framework for declarative, multimodal synthetic data generation from preview to production scale.
+    date: September 15, 2026
     kind: Research
     source: arXiv
     url: https://arxiv.org/abs/2609.17699
@@ -8,13 +9,23 @@ activity:
 
   - title: Where Security Fits in an AI Agent Stack
     description: A layered model for placing enforceable security controls below agent harnesses and models.
+    date: August 21, 2026
     kind: Writing
     source: NVIDIA Technical Blog
     url: https://developer.nvidia.com/blog/where-security-fits-in-an-ai-agent-stack/
     external: true
 
+  - title: Leading OpenShell Research
+    description: A new research team and open journal for research engineering built on the OpenShell runtime.
+    date: June 23, 2026
+    kind: Research
+    source: NVIDIA
+    url: https://github.com/NVIDIA/OpenShell-Research
+    external: true
+
   - title: "Have It Your Way: Customizing Data Designer with Plugins"
     description: A plugin framework for the custom pieces every real project ends up needing.
+    date: May 5, 2026
     kind: Writing
     source: NVIDIA NeMo Data Designer
     url: https://docs.nvidia.com/nemo/datadesigner/dev-notes/have-it-your-way
@@ -22,14 +33,8 @@ activity:
 
   - title: Data Designer Got Skills
     description: Lessons from building and benchmarking an agent-first CLI and skill for Data Designer.
+    date: March 24, 2026
     kind: Writing
     source: NVIDIA NeMo Data Designer
     url: https://docs.nvidia.com/nemo/datadesigner/dev-notes/data-designer-got-skills
-    external: true
-
-  - title: Leading OpenShell Research
-    description: A new research team and open journal for research engineering built on the OpenShell runtime.
-    kind: Research
-    source: NVIDIA
-    url: https://github.com/NVIDIA/OpenShell-Research
     external: true

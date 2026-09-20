@@ -50,7 +50,7 @@ tab and display an external-link mark.
 ## Update recent activity
 
 The homepage feed and Activity archive use `data/activity.yml`. Put the newest
-entry first and provide a short `kind`, source, URL, and one-sentence
+entry first and provide a date, short `kind`, source, URL, and one-sentence
 description. Set `external: true` for links that leave this site.
 
 ## Update the project spotlight

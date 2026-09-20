@@ -30,7 +30,7 @@ hide:
     <div class="activity-list">
     {% for item in activity[:3] %}
       <a class="activity-item" href="{{ item.url }}"{% if item.external %} target="_blank" rel="noopener noreferrer"{% endif %}>
-        <div class="activity-meta"><span>{{ item.kind }}</span><span>{{ item.source }}</span></div>
+        <div class="activity-meta"><span>{{ item.kind }}</span><span>{{ item.source }} · {{ item.date }}</span></div>
         <h3>{{ item.title }}{% if item.external %} <span aria-hidden="true">↗</span>{% endif %}</h3>
         <p>{{ item.description }}</p>
       </a>

@@ -40,7 +40,8 @@ piece hosted here. Then create `docs/writing/my-piece.md` with regular Markdown.
 
 Add items displayed in the homepage activity feed to `data/activity.yml`.
 Activity can point to writing, research, releases, or other work; add the newest
-item at the top and keep its description to one sentence.
+item at the top, include its publication date, and keep its description to one
+sentence.
 
 ## Important files
 

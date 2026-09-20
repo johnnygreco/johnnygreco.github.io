@@ -18,6 +18,7 @@ Recent writing, research, and things I’m building.
       <h2>{{ item.title }}{% if item.external %} <span aria-hidden="true">↗</span>{% endif %}</h2>
       <p>{{ item.description }}</p>
     </div>
+    <time>{{ item.date }}</time>
   </a>
 {% endfor %}
 </div>
