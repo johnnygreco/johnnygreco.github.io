@@ -287,8 +287,8 @@ body, input { font-family: var(--md-text-font); }
   padding: 2.25rem 0 0;
   grid-template-columns: minmax(19rem, .84fr) minmax(28rem, 1.16fr);
   grid-template-areas:
-    "profile project"
-    "profile activity";
+    "profile activity"
+    "profile project";
   column-gap: clamp(2.75rem, 5.5vw, 4.75rem);
   row-gap: 3.5rem;
   align-items: start;
@@ -387,7 +387,6 @@ body, input { font-family: var(--md-text-font); }
 
 .activity-panel {
   min-width: 0;
-  padding-top: 1.35rem;
   grid-area: activity;
 }
 
@@ -454,6 +453,7 @@ body, input { font-family: var(--md-text-font); }
 
 .project-spotlight {
   min-width: 0;
+  padding-top: 1.35rem;
   grid-area: project;
 }
 
@@ -600,11 +600,11 @@ body, input { font-family: var(--md-text-font); }
     max-width: none;
     padding: 1rem 0 0;
     grid-template-columns: 1fr;
-    grid-template-areas: "profile" "project" "activity";
+    grid-template-areas: "profile" "activity" "project";
     gap: 3.25rem;
   }
   .home-profile { padding-top: 1.5rem; }
-  .activity-panel { padding-top: 0; }
+  .project-spotlight { padding-top: 0; }
 }
 
 @media screen and (max-width: 44.984375em) {
