@@ -1,4 +1,18 @@
 activity:
+  - title: "NeMo Data Designer: An Extensible Framework for Multimodal Synthetic Data Generation"
+    description: An open-source framework for declarative, multimodal synthetic data generation from preview to production scale.
+    kind: Research
+    source: arXiv
+    url: https://arxiv.org/abs/2609.17699
+    external: true
+
+  - title: Where Security Fits in an AI Agent Stack
+    description: A layered model for placing enforceable security controls below agent harnesses and models.
+    kind: Writing
+    source: NVIDIA Technical Blog
+    url: https://developer.nvidia.com/blog/where-security-fits-in-an-ai-agent-stack/
+    external: true
+
   - title: "Have It Your Way: Customizing Data Designer with Plugins"
     description: A plugin framework for the custom pieces every real project ends up needing.
     kind: Writing
