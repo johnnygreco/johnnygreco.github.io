@@ -59,12 +59,11 @@ things being built or led are Projects. Keep authored pieces in
 `data/writing.yml` and project records in `data/projects.yml`, then add either to
 `data/activity.yml` when it should appear in the chronological feed.
 
-## Update the project spotlight
+## Update the project archive
 
-Project details live in `data/projects.yml`. Every entry participates in the
-random homepage selection and needs a name, owner, description, GitHub URL,
-local preview image, language, and color accent. Preview images live in
-`docs/assets/projects/`.
+Project details live in `data/projects.yml`. Every entry appears on the Projects
+page and needs a name, owner, description, GitHub URL, local preview image,
+language, and color accent. Preview images live in `docs/assets/projects/`.
 
 ## Design and assets
 

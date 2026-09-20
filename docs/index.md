@@ -38,33 +38,4 @@ hide:
     </div>
     <a class="section-link" href="activity/">All activity <span aria-hidden="true">→</span></a>
   </section>
-
-  <section class="project-spotlight" aria-labelledby="project-heading">
-    <div class="section-heading">
-      <h2 id="project-heading">Project spotlight</h2>
-      <span class="section-emoji" aria-hidden="true">🔦</span>
-    </div>
-    <div class="project-stack">
-    {% for project in projects %}
-      <a class="project-card project-card--{{ project.accent }}{% if not loop.first %} is-hidden{% endif %}" href="{{ project.url }}" target="_blank" rel="noopener noreferrer" data-project-card>
-        <img src="{{ project.image }}" alt="{{ project.name }} project preview">
-        <div class="project-card-body">
-          <div class="project-meta"><span>{{ project.owner }}</span><span>{{ project.language }}</span></div>
-          <h3>{{ project.name }} <span aria-hidden="true">↗</span></h3>
-          <p>{{ project.description }}</p>
-        </div>
-      </a>
-    {% endfor %}
-    </div>
-    <a class="section-link" href="projects/">All projects <span aria-hidden="true">→</span></a>
-  </section>
 </div>
-
-<script>
-  (() => {
-    const cards = Array.from(document.querySelectorAll('[data-project-card]'));
-    if (!cards.length) return;
-    const selected = Math.floor(Math.random() * cards.length);
-    cards.forEach((card, index) => card.classList.toggle('is-hidden', index !== selected));
-  })();
-</script>

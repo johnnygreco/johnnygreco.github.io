@@ -12,7 +12,7 @@ docs/                       Markdown pages and static public files
   stylesheets/site-v4.css   Shared site design and layout tokens
 data/writing.yml            Writing archive data
 data/activity.yml           Homepage and archive activity data
-data/projects.yml           Random project-spotlight data
+data/projects.yml           Project archive data
 overrides/main.html         Zensical template overrides
   partials/content.html     Shared wrapper for every page
 zensical.toml               Site configuration and navigation
@@ -41,9 +41,6 @@ essays are Writing even when they describe a project. Launches, releases, and
 sustained things being built or led are Projects. Both may appear in the
 chronological activity feed, whose `kind` values are `Writing` and `Project`.
 
-The homepage also loops over `data/projects.yml`, then uses a small inline
-script to reveal one randomly selected project per visit.
-
 The macro configuration is strict, so missing data or rendering errors fail the
 build. Keep `docs/CNAME` and `docs/beacon/install.sh`; their deployed URLs are
 part of the site's existing behavior.
@@ -59,8 +56,7 @@ Pages workflow or deploy the site without explicit approval from Johnny.
 ## Design intent
 
 Preserve the old live site's quiet profile and simple social links. On desktop,
-the profile and compact Project spotlight share the left rail while Recent
-activity occupies the wider right column. On mobile, Recent activity follows
-the profile and Project spotlight comes last. Avoid reintroducing the previous
-terminal aesthetic or a heavy client runtime. Dark mode is supplied by
-Zensical's native palette control.
+the profile and Recent activity split the homepage evenly; on mobile, Recent
+activity follows the profile. Projects remain available from the dedicated
+Projects page. Avoid reintroducing the previous terminal aesthetic or a heavy
+client runtime. Dark mode is supplied by Zensical's native palette control.

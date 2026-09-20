@@ -2,7 +2,7 @@
 
 Johnny Greco's personal website, built with [Zensical](https://zensical.org/).
 The homepage keeps the small, personal feel of the original site and adds
-prominent recent activity plus a compact, randomized project spotlight.
+prominent recent activity alongside a focused profile.
 
 ## Run it locally
 
@@ -53,7 +53,7 @@ being built or led. Writing belongs in `data/writing.yml`; projects belong in
 - `zensical.toml` — site, navigation, theme, and extension configuration
 - `data/writing.yml` — Writing archive entries
 - `data/activity.yml` — recent homepage activity
-- `data/projects.yml` — projects eligible for the randomized spotlight
+- `data/projects.yml` — project archive entries
 - `docs/` — Markdown pages and static assets
 - `docs/stylesheets/site-v4.css` — shared visual design and layout tokens
 - `overrides/main.html` — small metadata/title overrides
