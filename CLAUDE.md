@@ -36,6 +36,11 @@ drives the Writing archive. New entries go at the top. External entries use an
 absolute URL and `external: true`; local pieces use a relative URL,
 `external: false`, and a Markdown file under `docs/writing/`.
 
+Classify content by what it is, not what it discusses. Articles, papers, and
+essays are Writing even when they describe a project. Launches, releases, and
+sustained things being built or led are Projects. Both may appear in the
+chronological activity feed, whose `kind` values are `Writing` and `Project`.
+
 The homepage also loops over `data/projects.yml`, then uses a small inline
 script to reveal one randomly selected project per visit.
 

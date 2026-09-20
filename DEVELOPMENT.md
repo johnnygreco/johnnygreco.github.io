@@ -53,6 +53,12 @@ The homepage feed and Activity archive use `data/activity.yml`. Put the newest
 entry first and provide a date, short `kind`, source, URL, and one-sentence
 description. Set `external: true` for links that leave this site.
 
+Activity kinds are `Writing` and `Project`. Articles, papers, and essays are
+Writing even when they describe a project; launches, releases, and sustained
+things being built or led are Projects. Keep authored pieces in
+`data/writing.yml` and project records in `data/projects.yml`, then add either to
+`data/activity.yml` when it should appear in the chronological feed.
+
 ## Update the project spotlight
 
 Project details live in `data/projects.yml`. Every entry participates in the

@@ -39,9 +39,14 @@ Use `external: false` and a relative URL such as `writing/my-piece/` for a
 piece hosted here. Then create `docs/writing/my-piece.md` with regular Markdown.
 
 Add items displayed in the homepage activity feed to `data/activity.yml`.
-Activity can point to writing, research, releases, or other work; add the newest
-item at the top, include its publication date, and keep its description to one
-sentence.
+Activity can point to writing, project launches, releases, or other work; add
+the newest item at the top, include its publication date, and keep its
+description to one sentence.
+
+Use `Writing` for authored artifacts such as articles and papers, even when they
+describe a project. Use `Project` for launches, releases, and ongoing things
+being built or led. Writing belongs in `data/writing.yml`; projects belong in
+`data/projects.yml`; either can also appear in the chronological activity feed.
 
 ## Important files
 

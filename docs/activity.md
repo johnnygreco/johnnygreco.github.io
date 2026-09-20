@@ -1,6 +1,6 @@
 ---
 title: Activity
-description: Recent writing, research, and projects from Johnny Greco.
+description: Recent writing and projects from Johnny Greco.
 hide:
   - navigation
   - toc
@@ -8,7 +8,7 @@ hide:
 
 # Activity
 
-Recent writing, research, and things I’m building.
+Recent writing and things I’m building.
 
 <div class="activity-archive">
 {% for item in activity %}

@@ -2,7 +2,7 @@ activity:
   - title: "NeMo Data Designer: An Extensible Framework for Multimodal Synthetic Data Generation"
     description: An open-source framework for declarative, multimodal synthetic data generation from preview to production scale.
     date: September 15, 2026
-    kind: Research
+    kind: Writing
     source: arXiv
     url: https://arxiv.org/abs/2609.17699
     external: true
@@ -18,7 +18,7 @@ activity:
   - title: Leading OpenShell Research
     description: A new research team and open journal for research engineering built on the OpenShell runtime.
     date: June 23, 2026
-    kind: Research
+    kind: Project
     source: NVIDIA
     url: https://github.com/NVIDIA/OpenShell-Research
     external: true
