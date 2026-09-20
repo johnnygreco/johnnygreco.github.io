@@ -59,7 +59,8 @@ Pages workflow or deploy the site without explicit approval from Johnny.
 ## Design intent
 
 Preserve the old live site's quiet profile and simple social links. On desktop,
-the profile sits in the left column while Project spotlight and Recent activity
-stack in the right column; on mobile, those sections follow the profile in that
-order. Avoid reintroducing the previous terminal aesthetic or a heavy client
-runtime. Dark mode is supplied by Zensical's native palette control.
+the profile and compact Project spotlight share the left rail while Recent
+activity occupies the wider right column. On mobile, Recent activity follows
+the profile and Project spotlight comes last. Avoid reintroducing the previous
+terminal aesthetic or a heavy client runtime. Dark mode is supplied by
+Zensical's native palette control.
