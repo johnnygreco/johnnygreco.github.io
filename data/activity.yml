@@ -1,4 +1,12 @@
 activity:
+  - title: The leak is coming from inside the sandbox
+    description: A simple experiment shows why network-layer redaction isn't enough.
+    date: September 26, 2026
+    kind: Writing
+    source: OpenShell Research
+    url: https://nvidia.github.io/OpenShell-Research/dev-notes/posts/2026-09-26-network-redaction-is-not-enough/
+    external: true
+
   - title: "NeMo Data Designer: An Extensible Framework for Multimodal Synthetic Data Generation"
     description: An open-source framework for declarative, multimodal synthetic data generation from preview to production scale.
     date: September 15, 2026
