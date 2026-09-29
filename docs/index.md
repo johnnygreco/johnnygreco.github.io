@@ -28,7 +28,7 @@ hide:
       <span class="section-emoji" aria-hidden="true">✍️</span>
     </div>
     <div class="activity-list">
-    {% for item in activity[:3] %}
+    {% for item in activity[:5] %}
       <a class="activity-item" href="{{ item.url }}"{% if item.external %} target="_blank" rel="noopener noreferrer"{% endif %}>
         <div class="activity-meta"><span>{{ item.kind }}</span><span>{{ item.source }} · {{ item.date }}</span></div>
         <h3>{{ item.title }}{% if item.external %} <span aria-hidden="true">↗</span>{% endif %}</h3>

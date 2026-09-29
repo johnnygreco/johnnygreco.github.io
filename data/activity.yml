@@ -1,4 +1,12 @@
 activity:
+  - title: Introducing OpenShell Research
+    description: Meet the team advancing safe and secure autonomous agents through open research built on OpenShell.
+    date: September 28, 2026
+    kind: Writing
+    source: OpenShell Research
+    url: https://nvidia.github.io/OpenShell-Research/dev-notes/posts/2026-09-28-introducing-openshell-research/
+    external: true
+
   - title: The leak is coming from inside the sandbox
     description: A simple experiment shows why network-layer redaction isn't enough.
     date: September 26, 2026
